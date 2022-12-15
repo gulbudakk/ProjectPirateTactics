@@ -13,7 +13,7 @@ void Renderer::Draw() {
 	m_Shader.SetUniformMatrix4fv("u_M", 1, GL_FALSE, &m_Transform.GetModel()[0][0]);
 
 
-	glm::vec3 lightPos = glm::vec3(4, 4, 4);
+	glm::vec3 lightPos = glm::vec3(8, 8, 8);
 	m_Shader.SetUniform3f("u_LightPosition", lightPos.x, lightPos.y, lightPos.z);
 
 	IndexBuffer& ib = m_Object.GetIndexBuffer();

@@ -12,13 +12,14 @@ private:
 	const unsigned int m_Rows;
 	const unsigned int m_Cols;
 
+	float m_Y;
 	float m_CellSize;
 	
 	VisualGameObject*** m_World;
 protected:
 	void Update();
 public:
-	Tilemap(unsigned int rows, unsigned int cols, float cellSize);
+	Tilemap(unsigned int rows, unsigned int cols, float cellSize, float z);
 	~Tilemap();
 
 	void Draw(VisualGameObject& object, unsigned int row, unsigned int col);

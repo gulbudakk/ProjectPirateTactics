@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Tilemap::Tilemap(const unsigned int rows, const unsigned int cols, float cellSize) : m_Rows(rows), m_Cols(cols), m_CellSize(cellSize){
+Tilemap::Tilemap(const unsigned int rows, const unsigned int cols, float cellSize, float z) : m_Rows(rows), m_Cols(cols), m_CellSize(cellSize), m_Y(z){
 	m_World = (VisualGameObject ***) malloc(m_Rows * sizeof(VisualGameObject**));
 
 	for (unsigned int r = 0; r < m_Rows; r++)
@@ -56,8 +56,14 @@ void Tilemap::Clear() {
 }
 
 void Tilemap::Draw(VisualGameObject& object, unsigned int row, unsigned int col) {
+
+	if (m_World[row][col] != nullptr)
+	{
+		std::cout << "Warning: Drawing an occupied cell!" << std::endl;
+	}
+
 	m_World[row][col] = &object;
 
-	object.GetTransform().SetModel(glm::translate(glm::mat4(1.0f), glm::vec3(row * m_CellSize, 0, col * m_CellSize)));
+	object.GetTransform().SetModel(glm::translate(glm::mat4(1.0f), glm::vec3(row * m_CellSize, m_Y * m_CellSize, col * m_CellSize)));
 }
 
