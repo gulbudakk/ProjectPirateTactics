@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstdint>
 
 #include "Application.h"
 #include "Shader.h"
@@ -18,6 +19,7 @@
 
 #include "PirateTactics/CameraMovement.h"
 #include "Texture.h"
+#include "PirateTactics/BoardCubeTile.h"
 
 using namespace std;
 using namespace glm;
@@ -42,25 +44,42 @@ int main(void)
     vec2 angle(-2.355f, -0.795f);
     Camera camera(position, angle, 45.0f, 0.1f, 100.0f);
 
+    vector<GameObject*> objects;
+    vector<VisualGameObject*> visualObjects;
+
     Transform transform;
     Texture texture("res/textures/dirt.png", GL_REPEAT);
     Shader shader("res/shaders/StandardVertexShading.shader", "res/shaders/StandardFragmentShading.shader");
-    Object3D object("res/models/cube.obj", shader);
-    Renderer renderer(camera, object, transform, texture);
+    Object3D object("res/models/cube.obj");
+
+    BoardCubeTile cube(camera, object, texture, shader);
+    BoardCubeTile cube2(camera, object, texture, shader);
+
+    objects.push_back(&cube);
+    visualObjects.push_back(&cube);
+
+    cube2.GetTransform().Translate(vec3(2.2, 0, 0));
+    objects.push_back(&cube2);
+    visualObjects.push_back(&cube2);
 
     CameraMovement cameraMovement(camera);
+    objects.push_back(&cameraMovement);
 
     /* Loop until the user closes the window */
     do
     {
         Time::Tick();
 
-        cameraMovement.Tick();
-        
         /* Render here */
-        renderer.Clear();
+        for (unsigned int i = 0; i < visualObjects.size(); i++)
+        {
+            visualObjects[i]->Clear();
+        }
 
-        renderer.Draw();
+        for (unsigned int i = 0; i < objects.size(); i++)
+        {
+            objects[i]->Tick();
+        }
 
         /* Swap front and back buffers */
         glfwSwapBuffers(&application.GetWindow());

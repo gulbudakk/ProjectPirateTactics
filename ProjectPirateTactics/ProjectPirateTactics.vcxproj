@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\PirateTactics\BoardCubeTile.cpp" />
     <ClCompile Include="src\Object3D.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\PirateTactics\CameraMovement.cpp" />
@@ -149,6 +150,8 @@
     <ClCompile Include="src\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\PirateTactics\BoardCubeTile.h" />
+    <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\Object3D.h" />
     <ClInclude Include="src\PirateTactics\CameraMovement.h" />
     <ClInclude Include="src\Application.h" />
@@ -165,6 +168,7 @@
     <ClInclude Include="src\VertexArray.h" />
     <ClInclude Include="src\Texture.h" />
     <ClInclude Include="src\Transform.h" />
+    <ClInclude Include="src\VisualGameObject.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\FragmentShader.shader" />

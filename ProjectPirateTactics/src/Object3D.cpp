@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Object3D::Object3D(const char* path, Shader& shader) : m_Shader(shader){
+Object3D::Object3D(const char* path) {
 	
 	vector<glm::vec3> positions;
 	vector<glm::vec2> uvs;

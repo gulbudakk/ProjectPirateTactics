@@ -1,8 +1,9 @@
 #pragma once
 #include <glm/glm.hpp>
 #include "../Camera.h"
+#include "../GameObject.h"
 
-class CameraMovement
+class CameraMovement : public GameObject
 {
 private:
 	Camera& m_Camera;
@@ -11,8 +12,9 @@ private:
 	float mouseSpeed = 0.005f;
 
 	void ComputeMatrices();
+protected:
+	void Update();
 public:
 	CameraMovement(Camera& camera) : m_Camera(camera) {}
-	void Tick();
 };
 

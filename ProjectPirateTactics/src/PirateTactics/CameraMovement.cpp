@@ -42,6 +42,6 @@ void CameraMovement::ComputeMatrices() {
 	}
 }
 
-void CameraMovement::Tick() {
+void CameraMovement::Update() {
 	ComputeMatrices();
 }

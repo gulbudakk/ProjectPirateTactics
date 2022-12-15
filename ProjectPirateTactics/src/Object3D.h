@@ -30,7 +30,7 @@ private:
 
 	VertexArray m_Va;
 	IndexBuffer m_Ib;
-	Shader& m_Shader;
+
 
 	vector<Vertex> m_Vertices;
 	vector<vec3> m_Positions;
@@ -48,8 +48,7 @@ private:
 	void CreateIndices(vector<vec3> positions, vector<vec2> uvs, vector<vec3> normals);
 
 public:
-	Object3D(const char* path, Shader& shader);
-	Shader& GetShader() { return m_Shader; }
+	Object3D(const char* path);
 	VertexArray& GetVertexArray() { return m_Va; }
 	IndexBuffer& GetIndexBuffer() { return m_Ib; }
 };

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 using namespace glm;
 
@@ -14,5 +15,6 @@ public:
 	
 	mat4 GetModel() const { return m_Model; }
 	void SetModel(mat4 model) { m_Model = model; }
+	void Translate(vec3 translationVector) { m_Model = translate(m_Model, translationVector); }
 };
 
