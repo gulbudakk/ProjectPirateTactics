@@ -12,4 +12,5 @@ public:
 	virtual void Tick() {
 		Update();
 	}
+	virtual void Clear() = 0;
 };

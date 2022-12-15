@@ -148,6 +148,7 @@
     <ClCompile Include="src\VertexBuffer.cpp" />
     <ClCompile Include="src\VertexArray.cpp" />
     <ClCompile Include="src\Texture.cpp" />
+    <ClCompile Include="src\Tilemap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\PirateTactics\BoardCubeTile.h" />
@@ -169,6 +170,7 @@
     <ClInclude Include="src\Texture.h" />
     <ClInclude Include="src\Transform.h" />
     <ClInclude Include="src\VisualGameObject.h" />
+    <ClInclude Include="src\Tilemap.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\FragmentShader.shader" />

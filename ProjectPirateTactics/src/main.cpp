@@ -20,6 +20,7 @@
 #include "PirateTactics/CameraMovement.h"
 #include "Texture.h"
 #include "PirateTactics/BoardCubeTile.h"
+#include "Tilemap.h"
 
 using namespace std;
 using namespace glm;
@@ -45,7 +46,6 @@ int main(void)
     Camera camera(position, angle, 45.0f, 0.1f, 100.0f);
 
     vector<GameObject*> objects;
-    vector<VisualGameObject*> visualObjects;
 
     Transform transform;
     Texture texture("res/textures/dirt.png", GL_REPEAT);
@@ -55,12 +55,12 @@ int main(void)
     BoardCubeTile cube(camera, object, texture, shader);
     BoardCubeTile cube2(camera, object, texture, shader);
 
-    objects.push_back(&cube);
-    visualObjects.push_back(&cube);
+    Tilemap tilemap(3, 3, 2);
 
-    cube2.GetTransform().Translate(vec3(2.2, 0, 0));
-    objects.push_back(&cube2);
-    visualObjects.push_back(&cube2);
+    objects.push_back(&tilemap);
+
+    tilemap.Draw(cube, 0, 0);
+    tilemap.Draw(cube2, 1, 1);
 
     CameraMovement cameraMovement(camera);
     objects.push_back(&cameraMovement);
@@ -71,9 +71,10 @@ int main(void)
         Time::Tick();
 
         /* Render here */
-        for (unsigned int i = 0; i < visualObjects.size(); i++)
+
+        for (unsigned int i = 0; i < objects.size(); i++)
         {
-            visualObjects[i]->Clear();
+            objects[i]->Clear();
         }
 
         for (unsigned int i = 0; i < objects.size(); i++)

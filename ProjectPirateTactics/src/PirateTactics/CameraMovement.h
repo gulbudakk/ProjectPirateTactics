@@ -16,5 +16,6 @@ protected:
 	void Update();
 public:
 	CameraMovement(Camera& camera) : m_Camera(camera) {}
+	void Clear() {};
 };
 
