@@ -31,7 +31,7 @@ int main(void)
     application.Enable(GL_DEPTH_TEST);
     application.Enable(GL_CULL_FACE);
     application.SetDepthFunction(GL_LESS);
-    
+
     //glClearColor(0.4f, 0.9f, 0.9f, 0.0f);
 
     Input::SetMousePosition(Application::GetWidth() / 2, Application::GetHeight() / 2);
@@ -53,7 +53,6 @@ int main(void)
     Shader shader("res/shaders/StandardVertexShading.shader", "res/shaders/StandardFragmentShading.shader");
     Object3D object("res/models/cube.obj");
 
-
     unsigned int rows = 4, cols = 4;
     Tilemap tilemap(rows, cols, 2.1, 0);
     objects.push_back(&tilemap);
@@ -67,50 +66,52 @@ int main(void)
     BoardCubeTile cube1(camera, object, texture, shader);
     tilemap.Draw(cube1, 0, 0);
 
-    BoardCubeTile cube2(camera, object, texture, shader);
-    tilemap.Draw(cube2, 0, 1);
+    { 
+        BoardCubeTile cube2(camera, object, texture, shader);
+        tilemap.Draw(cube2, 0, 1);
 
-    BoardCubeTile cube3(camera, object, texture, shader);
-    tilemap.Draw(cube3, 0, 2);
+        BoardCubeTile cube3(camera, object, texture, shader);
+        tilemap.Draw(cube3, 0, 2);
 
-    BoardCubeTile cube4(camera, object, texture, shader);
-    tilemap.Draw(cube4, 0, 3);
+        BoardCubeTile cube4(camera, object, texture, shader);
+        tilemap.Draw(cube4, 0, 3);
 
-    BoardCubeTile cube5(camera, object, texture, shader);
-    tilemap.Draw(cube5, 1, 0);
+        BoardCubeTile cube5(camera, object, texture, shader);
+        tilemap.Draw(cube5, 1, 0);
 
-    BoardCubeTile cube6(camera, object, texture, shader);
-    tilemap.Draw(cube6, 1, 1);
+        BoardCubeTile cube6(camera, object, texture, shader);
+        tilemap.Draw(cube6, 1, 1);
 
-    BoardCubeTile cube7(camera, object, texture, shader);
-    tilemap.Draw(cube7, 1, 2);
+        BoardCubeTile cube7(camera, object, texture, shader);
+        tilemap.Draw(cube7, 1, 2);
 
-    BoardCubeTile cube8(camera, object, texture, shader);
-    tilemap.Draw(cube8, 1, 3);
+        BoardCubeTile cube8(camera, object, texture, shader);
+        tilemap.Draw(cube8, 1, 3);
 
-    BoardCubeTile cube9(camera, object, texture, shader);
-    tilemap.Draw(cube9, 2, 0);
+        BoardCubeTile cube9(camera, object, texture, shader);
+        tilemap.Draw(cube9, 2, 0);
 
-    BoardCubeTile cube10(camera, object, texture, shader);
-    tilemap.Draw(cube10, 2, 1);
+        BoardCubeTile cube10(camera, object, texture, shader);
+        tilemap.Draw(cube10, 2, 1);
 
-    BoardCubeTile cube11(camera, object, texture, shader);
-    tilemap.Draw(cube11, 2, 2);
+        BoardCubeTile cube11(camera, object, texture, shader);
+        tilemap.Draw(cube11, 2, 2);
 
-    BoardCubeTile cube12(camera, object, texture, shader);
-    tilemap.Draw(cube12, 2, 3);
+        BoardCubeTile cube12(camera, object, texture, shader);
+        tilemap.Draw(cube12, 2, 3);
 
-    BoardCubeTile cube14(camera, object, texture, shader);
-    tilemap.Draw(cube14, 3, 0);
+        BoardCubeTile cube14(camera, object, texture, shader);
+        tilemap.Draw(cube14, 3, 0);
 
-    BoardCubeTile cube15(camera, object, texture, shader);
-    tilemap.Draw(cube15, 3, 1);
+        BoardCubeTile cube15(camera, object, texture, shader);
+        tilemap.Draw(cube15, 3, 1);
 
-    BoardCubeTile cube16(camera, object, texture, shader);
-    tilemap.Draw(cube16, 3, 2);
+        BoardCubeTile cube16(camera, object, texture, shader);
+        tilemap.Draw(cube16, 3, 2);
 
-    BoardCubeTile cube17(camera, object, texture, shader);
-    tilemap.Draw(cube17, 3, 3);
+        BoardCubeTile cube17(camera, object, texture, shader);
+        tilemap.Draw(cube17, 3, 3); 
+    }
 
     CameraMovement cameraMovement(camera);
     objects.push_back(&cameraMovement);
