@@ -164,9 +164,12 @@
     <ClInclude Include="src\VertexBufferLayout.h" />
     <ClInclude Include="src\VertexArray.h" />
     <ClInclude Include="src\Texture.h" />
+    <ClInclude Include="src\Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\FragmentShader.shader" />
+    <None Include="res\shaders\StandardFragmentShading.shader" />
+    <None Include="res\shaders\StandardVertexShading.shader" />
     <None Include="res\shaders\TextureFragmentShader.shader" />
     <None Include="res\shaders\TextureVertexShader.shader" />
     <None Include="res\shaders\VertexShader.shader" />

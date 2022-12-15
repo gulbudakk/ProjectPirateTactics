@@ -42,13 +42,11 @@ int main(void)
     vec2 angle(-2.355f, -0.795f);
     Camera camera(position, angle, 45.0f, 0.1f, 100.0f);
 
+    Transform transform;
     Texture texture("res/textures/dirt.png", GL_REPEAT);
-
-    Shader shader("res/shaders/TextureVertexShader.shader", "res/shaders/TextureFragmentShader.shader");
-
+    Shader shader("res/shaders/StandardVertexShading.shader", "res/shaders/StandardFragmentShading.shader");
     Object3D object("res/models/cube.obj", shader);
-
-    Renderer renderer(camera, object, texture);
+    Renderer renderer(camera, object, transform, texture);
 
     CameraMovement cameraMovement(camera);
 

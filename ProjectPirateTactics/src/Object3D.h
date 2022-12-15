@@ -15,7 +15,7 @@ using namespace std;
 struct Vertex {
 	vec3 position;
 	vec2 uv;
-	//vec3 normal;
+	vec3 normal;
 
 	bool operator<(const Vertex that) const {
 		return memcmp((void*)this, (void*)&that, sizeof(Vertex)) > 0;
@@ -35,13 +35,17 @@ private:
 	vector<Vertex> m_Vertices;
 	vector<vec3> m_Positions;
 	vector<vec2> m_Uvs;
+	vector<vec3> m_Normals;
 	vector<unsigned int> m_Indices;
 
 	bool GetSimilarVertex(vec3 vertex, unsigned int& result);
 	bool GetSimilarVertex(Vertex& packed, map<Vertex, unsigned int>& VertexToOutIndex, unsigned int& result);
+
 	bool loadOBJ(const char* path, vector<glm::vec3>& out_vertices, vector<glm::vec2>& out_uvs, vector<glm::vec3>& out_normals);
+
 	void CreateIndices(vector<vec3> positions);
 	void CreateIndices(vector<vec3> positions, vector<vec2> uvs);
+	void CreateIndices(vector<vec3> positions, vector<vec2> uvs, vector<vec3> normals);
 
 public:
 	Object3D(const char* path, Shader& shader);

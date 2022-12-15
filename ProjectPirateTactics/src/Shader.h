@@ -37,6 +37,7 @@ public:
 	void Unbind() const;
 
 	void SetUniform4f(const string& name, float v0, float v1, float v2, float v3);
+	void SetUniform3f(const string& name, float v0, float v1, float v2);
 	void SetUniformMatrix4fv(const string& name, unsigned int count, bool transpose, const float* value);
 	void SetUniform1i(const string& name, int value);
 };

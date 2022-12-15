@@ -4,16 +4,19 @@ using namespace std;
 
 Object3D::Object3D(const char* path, Shader& shader) : m_Shader(shader){
 	
-	vector<glm::vec3> out_normals;
+	vector<glm::vec3> positions;
+	vector<glm::vec2> uvs;
+	vector<glm::vec3> normals;
 
-	loadOBJ(path, m_Positions, m_Uvs, out_normals);
+	loadOBJ(path, positions, uvs, normals);
 
 	m_Va.Bind();
 
-	CreateIndices(m_Positions, m_Uvs);
+	CreateIndices(positions, uvs, normals);
 
 	VertexBuffer vb(m_Positions, m_Positions.size() * sizeof(vec3));
 	VertexBuffer uvb(m_Uvs, m_Uvs.size() * sizeof(vec2));
+	VertexBuffer nb(m_Normals, m_Normals.size() * sizeof(vec3));
 
 	VertexBufferLayout layout;
 	layout.Push<float>(vb.GetID(), 3);
@@ -21,6 +24,9 @@ Object3D::Object3D(const char* path, Shader& shader) : m_Shader(shader){
 
 	layout.Push<float>(uvb.GetID(), 2);
 	m_Va.AddBuffer(uvb, layout);
+
+	layout.Push<float>(nb.GetID(), 3);
+	m_Va.AddBuffer(nb, layout);
 
 	IndexBuffer ib(m_Indices, m_Indices.size());
 	m_Ib = ib;
@@ -248,6 +254,34 @@ void Object3D::CreateIndices(vector<vec3> positions, vector<vec2> uvs) {
 		else { // If not, it needs to be added in the output data.
 			m_Positions.push_back(positions[i]);
 			m_Uvs.push_back(uvs[i]);
+			unsigned short newindex = (unsigned int)m_Positions.size() - 1;
+			m_Indices.push_back(newindex);
+			VertexToOutIndex[packed] = newindex;
+		}
+	}
+}
+
+void Object3D::CreateIndices(vector<vec3> positions, vector<vec2> uvs, vector<vec3> normals) {
+
+	map<Vertex, unsigned int> VertexToOutIndex;
+
+	// For each input vertex
+	for (unsigned int i = 0; i < positions.size(); i++) {
+
+		Vertex packed = {positions[i], uvs[i], normals[i]};
+
+		// Try to find a similar vertex in out_XXXX
+		unsigned int index;
+		bool found = GetSimilarVertex(packed, VertexToOutIndex, index);
+
+		if (found) { // A similar vertex is already in the VBO, use it instead !
+			m_Indices.push_back(index);
+		}
+		else { // If not, it needs to be added in the output data.
+			m_Positions.push_back(positions[i]);
+			m_Uvs.push_back(uvs[i]);
+			m_Normals.push_back(normals[i]);
+
 			unsigned short newindex = (unsigned int)m_Positions.size() - 1;
 			m_Indices.push_back(newindex);
 			VertexToOutIndex[packed] = newindex;

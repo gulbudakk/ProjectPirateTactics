@@ -127,6 +127,10 @@ void Shader::SetUniform4f(const string& name, float v0, float v1, float v2, floa
 	glUniform4f(GetUniformLocation(name), v0, v1, v2, v3);
 }
 
+void Shader::SetUniform3f(const string& name, float v0, float v1, float v2) {
+	glUniform3f(GetUniformLocation(name), v0, v1, v2);
+}
+
 void Shader::SetUniformMatrix4fv(const string& name, unsigned int count, bool transpose, const float* value) {
 	glUniformMatrix4fv(GetUniformLocation(name), count, transpose, value);
 }

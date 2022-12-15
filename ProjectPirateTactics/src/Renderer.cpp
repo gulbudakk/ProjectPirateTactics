@@ -7,10 +7,16 @@ void Renderer::Draw() {
 	Shader shader = m_Object.GetShader();
 
 	shader.Bind();
-	shader.SetUniformMatrix4fv("u_MVP", 1, GL_FALSE, &m_Camera.GetMVP(m_Model)[0][0]);
+	shader.SetUniformMatrix4fv("u_MVP", 1, GL_FALSE, &m_Camera.GetMVP(m_Transform.GetModel())[0][0]);
 
 	m_Texture.Bind();
 	shader.SetUniform1i("u_Texture", 0);
+	shader.SetUniformMatrix4fv("u_V", 1, GL_FALSE, &m_Camera.GetView()[0][0]);
+	shader.SetUniformMatrix4fv("u_M", 1, GL_FALSE, &m_Transform.GetModel()[0][0]);
+
+
+	glm::vec3 lightPos = glm::vec3(4, 4, 4);
+	shader.SetUniform3f("u_LightPosition", lightPos.x, lightPos.y, lightPos.z);
 
 	IndexBuffer& ib = m_Object.GetIndexBuffer();
 	ib.Bind();
