@@ -54,7 +54,7 @@ int main(void)
     Object3D object("res/models/cube.obj");
 
     unsigned int rows = 4, cols = 4;
-    Tilemap tilemap(rows, cols, 2, 0);
+    Tilemap tilemap(rows, cols, 2.1, 0);
     objects.push_back(&tilemap);
 
     Tilemap obstacleTilemap(rows, cols, 2.1, 1);
