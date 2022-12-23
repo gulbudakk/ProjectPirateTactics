@@ -54,64 +54,23 @@ int main(void)
     Object3D object("res/models/cube.obj");
 
     unsigned int rows = 4, cols = 4;
-    Tilemap tilemap(rows, cols, 2.1, 0);
+    Tilemap tilemap(rows, cols, 2, 0);
     objects.push_back(&tilemap);
 
     Tilemap obstacleTilemap(rows, cols, 2.1, 1);
     objects.push_back(&obstacleTilemap);
 
+    for (unsigned int r = 0; r < rows; r++)
+    {
+        for (unsigned int c = 0; c < cols; c++)
+        {
+            BoardCubeTile *tile = new BoardCubeTile(camera, object, texture, shader);
+            tilemap.Draw(*tile, r, c);
+        }
+    }
+
     BoardCubeTile rock1(camera, object, textureRock, shader);
     obstacleTilemap.Draw(rock1, 2, 2);
-
-    BoardCubeTile cube1(camera, object, texture, shader);
-    tilemap.Draw(cube1, 0, 0);
-
-    { 
-        BoardCubeTile cube2(camera, object, texture, shader);
-        tilemap.Draw(cube2, 0, 1);
-
-        BoardCubeTile cube3(camera, object, texture, shader);
-        tilemap.Draw(cube3, 0, 2);
-
-        BoardCubeTile cube4(camera, object, texture, shader);
-        tilemap.Draw(cube4, 0, 3);
-
-        BoardCubeTile cube5(camera, object, texture, shader);
-        tilemap.Draw(cube5, 1, 0);
-
-        BoardCubeTile cube6(camera, object, texture, shader);
-        tilemap.Draw(cube6, 1, 1);
-
-        BoardCubeTile cube7(camera, object, texture, shader);
-        tilemap.Draw(cube7, 1, 2);
-
-        BoardCubeTile cube8(camera, object, texture, shader);
-        tilemap.Draw(cube8, 1, 3);
-
-        BoardCubeTile cube9(camera, object, texture, shader);
-        tilemap.Draw(cube9, 2, 0);
-
-        BoardCubeTile cube10(camera, object, texture, shader);
-        tilemap.Draw(cube10, 2, 1);
-
-        BoardCubeTile cube11(camera, object, texture, shader);
-        tilemap.Draw(cube11, 2, 2);
-
-        BoardCubeTile cube12(camera, object, texture, shader);
-        tilemap.Draw(cube12, 2, 3);
-
-        BoardCubeTile cube14(camera, object, texture, shader);
-        tilemap.Draw(cube14, 3, 0);
-
-        BoardCubeTile cube15(camera, object, texture, shader);
-        tilemap.Draw(cube15, 3, 1);
-
-        BoardCubeTile cube16(camera, object, texture, shader);
-        tilemap.Draw(cube16, 3, 2);
-
-        BoardCubeTile cube17(camera, object, texture, shader);
-        tilemap.Draw(cube17, 3, 3); 
-    }
 
     CameraMovement cameraMovement(camera);
     objects.push_back(&cameraMovement);
