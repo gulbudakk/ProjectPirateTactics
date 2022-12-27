@@ -2,7 +2,9 @@
 #include "Camera.h"
 #include "Object3D.h"
 
-const glm::vec3 Renderer::m_LightSource = glm::vec3(8, 8, 8);
+using namespace glm;
+
+const Light Renderer::m_Light(vec3(0.9f, 1, 0.9f), vec3(1, 10, 1), 50.0f);
 
 void Renderer::Draw() {
 	
@@ -14,7 +16,14 @@ void Renderer::Draw() {
 	m_Shader.SetUniformMatrix4fv("u_V", 1, GL_FALSE, &m_Camera.GetView()[0][0]);
 	m_Shader.SetUniformMatrix4fv("u_M", 1, GL_FALSE, &m_Transform.GetModel()[0][0]);
 
-	m_Shader.SetUniform3f("u_LightPosition", m_LightSource.x, m_LightSource.y, m_LightSource.z);
+	vec3 lightPosition = m_Light.GetPosition();
+	m_Shader.SetUniform3f("u_LightPosition", lightPosition.x, lightPosition.y, lightPosition.z);
+
+	vec3 lightColor = m_Light.GetColor();
+	m_Shader.SetUniform3f("u_LightColor", lightColor.x, lightColor.y, lightColor.z);
+
+	float lightPower = m_Light.GetPower();
+	m_Shader.SetUniform1f("u_LightPower", lightPower);
 
 	IndexBuffer& ib = m_Object.GetIndexBuffer();
 	ib.Bind();

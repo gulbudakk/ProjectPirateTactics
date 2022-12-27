@@ -65,14 +65,5 @@ void Tilemap::Draw(VisualGameObject& object, unsigned int row, unsigned int col)
 	m_World[row][col] = &object;
 
 	object.GetTransform().SetModel(glm::translate(glm::mat4(1.0f), glm::vec3(row * m_CellSize, m_Y * m_CellSize, col * m_CellSize)));
-
-	cout << "start" << endl;
-	for (unsigned int r = 0; r < m_Rows; r++)
-	{
-		for (unsigned int c = 0; c < m_Cols; c++)
-		{
-			cout << m_World[r][c] << endl;
-		}
-	}
 }
 

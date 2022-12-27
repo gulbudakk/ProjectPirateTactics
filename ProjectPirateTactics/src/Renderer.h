@@ -9,6 +9,7 @@
 #include "Object3D.h"
 #include "Texture.h"
 #include "Transform.h"
+#include "Light.h"
 
 class Renderer
 {
@@ -19,7 +20,7 @@ private:
 	Texture& m_Texture;
 	Transform& m_Transform;
 
-	static const vec3 m_LightSource;
+	static const Light m_Light;
 
 public:
 	Renderer(Camera& camera, Object3D& object, Transform& transform, Texture& texture, Shader& shader) : m_Camera(camera), m_Object(object), m_Texture(texture), m_Transform(transform), m_Shader(shader) {}

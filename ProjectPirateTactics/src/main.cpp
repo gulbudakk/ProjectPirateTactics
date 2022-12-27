@@ -1,4 +1,5 @@
 #include <GL/glew.h>
+#include <GL/GLU.h>  
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -25,6 +26,7 @@
 using namespace std;
 using namespace glm;
 
+
 int main(void)
 {
     Application application("Project Pirate Tactics", 1280, 720, 4);
@@ -32,7 +34,7 @@ int main(void)
     application.Enable(GL_CULL_FACE);
     application.SetDepthFunction(GL_LESS);
 
-    //glClearColor(0.4f, 0.9f, 0.9f, 0.0f);
+    glClearColor(0.8f, 1, 1, 0.0f);
 
     Input::SetMousePosition(Application::GetWidth() / 2, Application::GetHeight() / 2);
 
@@ -74,6 +76,7 @@ int main(void)
 
     CameraMovement cameraMovement(camera);
     objects.push_back(&cameraMovement);
+
 
     /* Loop until the user closes the window */
     do

@@ -40,5 +40,6 @@ public:
 	void SetUniform3f(const string& name, float v0, float v1, float v2);
 	void SetUniformMatrix4fv(const string& name, unsigned int count, bool transpose, const float* value);
 	void SetUniform1i(const string& name, int value);
+	void SetUniform1f(const string& name, float value);
 };
 
