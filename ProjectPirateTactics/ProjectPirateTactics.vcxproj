@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\PirateTactics\ScoreText.cpp" />
     <ClCompile Include="src\ui\Font.cpp" />
     <ClCompile Include="src\Light.cpp" />
     <ClCompile Include="src\Clouds.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="src\ui\Text.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\PirateTactics\ScoreText.h" />
     <ClInclude Include="src\ui\Character.h" />
     <ClInclude Include="src\ui\Font.h" />
     <ClInclude Include="src\Light.h" />
@@ -171,6 +173,7 @@
     <ClInclude Include="src\Renderer.h" />
     <ClInclude Include="src\ShaderLoader.hpp" />
     <ClInclude Include="src\Time.h" />
+    <ClInclude Include="src\ui\TextObject.h" />
     <ClInclude Include="src\ui\TextRenderer.h" />
     <ClInclude Include="src\vendor\stb_image\stb_image.h" />
     <ClInclude Include="src\VertexBuffer.h" />

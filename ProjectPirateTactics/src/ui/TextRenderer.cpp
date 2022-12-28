@@ -15,7 +15,7 @@ void TextRenderer::Draw() {
 	m_text.GetFont().GetTexture().Bind();
 	m_shader.SetUniform1i("u_fontAtlas", 0);
 	
-	VertexArray& va = m_text.GetVa();
+	VertexArray& va = m_text.GetVertexArray();
 	va.Bind();
 
 	glDrawArrays(GL_TRIANGLES, 0, m_text.GetVertexCount());

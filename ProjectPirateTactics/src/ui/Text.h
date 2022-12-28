@@ -111,16 +111,8 @@ public:
 		UpdateVertices();
 	}
 
-	VertexArray& GetVa() {
+	VertexArray& GetVertexArray() {
 		return m_Va;
-	}
-
-	VertexBuffer& GetPositionBuffer() {
-		return m_pb;
-	}
-
-	VertexBuffer& GetTextureBuffer() {
-		return m_tb;
 	}
 
 	vec2 GetTranslation() {
@@ -145,6 +137,10 @@ public:
 
 	vector<float> GetTextureCoordinates() {
 		return m_textureCoords;
+	}
+
+	void SetPosition(vec2 position) {
+		m_translation = position;
 	}
 };
 

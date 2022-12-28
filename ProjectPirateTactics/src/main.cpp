@@ -25,6 +25,7 @@
 #include "ui/Font.h"
 #include "ui/Text.h"
 #include "ui/TextRenderer.h"
+#include "PirateTactics/ScoreText.h"
 
 using namespace std;
 using namespace glm;
@@ -84,8 +85,17 @@ int main(void)
     Shader textShader("res/shaders/FontVertexShader.shader", "res/shaders/FontFragmentShader.shader");
     Font font(fontTexture, "res/fonts/arial.fnt");
 
-    Text text(font, 1, 1, "1 2 3 4 5 6 7 8 9 0", 5);
-    TextRenderer textRenderer(text, textShader);
+    Text text1(font, 1, 1, "6", 5);
+    Text text2(font, 1, 1, "6", 5);
+
+    ScoreText scoreText1(text1, textShader);
+    ScoreText scoreText2(text2, textShader);
+
+    objects.push_back(&scoreText1);
+    objects.push_back(&scoreText2);
+
+    scoreText1.SetPosition(vec2(-0.9f, 0.0f));
+    scoreText2.SetPosition(vec2(0.9f, 0.0f));
 
     /* Loop until the user closes the window */
     do
@@ -93,8 +103,6 @@ int main(void)
         Time::Tick();
 
         /* Render here */
-
-        textRenderer.Clear();
 
         for (unsigned int i = 0; i < objects.size(); i++)
         {
@@ -105,8 +113,6 @@ int main(void)
         {
             objects[i]->Tick();
         }
-
-        textRenderer.Draw();
 
         /* Swap front and back buffers */
         glfwSwapBuffers(&application.GetWindow());
