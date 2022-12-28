@@ -19,5 +19,9 @@ public:
 	void Bind(unsigned int slot = 0) const;
 	void Unbind() const;
 	void Delete() const;
+
+	unsigned int GetID() {
+		return m_RendererID;
+	}
 };
 

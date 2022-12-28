@@ -33,7 +33,7 @@ void Renderer::Draw() {
 
 	glDrawElements(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, nullptr);
 	//glDrawArrays(GL_TRIANGLES, 0, 12 * 3); // 12*3 indices starting at 0 -> 12 triangles
-	
+	 
 	/*
 	Shader shader = m_Object.GetShader();
 

@@ -13,6 +13,7 @@ private:
 public:
 	VertexBuffer(const vector<vec3> data, unsigned int size);
 	VertexBuffer(const vector<vec2> data, unsigned int size);
+	VertexBuffer(const vector<float> data, unsigned int size);
 	VertexBuffer() : m_RendererID(0) {}
 
 	void Bind() const;

@@ -18,9 +18,11 @@ private:
 public:
     Application(const char* name, int width, int height, int samples);
 
-    void Enable(GLenum cap) const;
+    static void Enable(GLenum cap);
+    static void Disable(GLenum cap);
     void SetWindowHint(int hint, int value) const;
-    void SetDepthFunction(GLenum function) const;
+    static void SetDepthFunction(GLenum function);
+    static void SetBlendFunction(GLenum sfactor, GLenum dfactor);
 
     static GLFWwindow& GetWindow() { return *m_Window; };
     static int GetHeight() { return m_Height; };

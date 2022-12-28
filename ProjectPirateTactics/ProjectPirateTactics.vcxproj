@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ui\Font.cpp" />
     <ClCompile Include="src\Light.cpp" />
     <ClCompile Include="src\Clouds.cpp" />
     <ClCompile Include="src\PirateTactics\BoardCubeTile.cpp" />
@@ -147,12 +148,16 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ShaderLoader.cpp" />
     <ClCompile Include="src\Time.cpp" />
+    <ClCompile Include="src\ui\TextRenderer.cpp" />
     <ClCompile Include="src\VertexBuffer.cpp" />
     <ClCompile Include="src\VertexArray.cpp" />
     <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\Tilemap.cpp" />
+    <ClCompile Include="src\ui\Text.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ui\Character.h" />
+    <ClInclude Include="src\ui\Font.h" />
     <ClInclude Include="src\Light.h" />
     <ClInclude Include="src\PirateTactics\BoardCubeTile.h" />
     <ClInclude Include="src\GameObject.h" />
@@ -166,6 +171,7 @@
     <ClInclude Include="src\Renderer.h" />
     <ClInclude Include="src\ShaderLoader.hpp" />
     <ClInclude Include="src\Time.h" />
+    <ClInclude Include="src\ui\TextRenderer.h" />
     <ClInclude Include="src\vendor\stb_image\stb_image.h" />
     <ClInclude Include="src\VertexBuffer.h" />
     <ClInclude Include="src\VertexBufferLayout.h" />
@@ -174,14 +180,33 @@
     <ClInclude Include="src\Transform.h" />
     <ClInclude Include="src\VisualGameObject.h" />
     <ClInclude Include="src\Tilemap.h" />
+    <ClInclude Include="src\ui\Text.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="res\fonts\arial.fnt" />
+    <None Include="res\fonts\calibri.fnt" />
+    <None Include="res\fonts\harrington.fnt" />
+    <None Include="res\fonts\sans.fnt" />
+    <None Include="res\fonts\segoe.fnt" />
+    <None Include="res\fonts\segoeUI.fnt" />
+    <None Include="res\fonts\tahoma.fnt" />
+    <None Include="res\shaders\FontFragmentShader.shader" />
+    <None Include="res\shaders\FontVertexShader.shader" />
     <None Include="res\shaders\FragmentShader.shader" />
     <None Include="res\shaders\StandardFragmentShading.shader" />
     <None Include="res\shaders\StandardVertexShading.shader" />
     <None Include="res\shaders\TextureFragmentShader.shader" />
     <None Include="res\shaders\TextureVertexShader.shader" />
     <None Include="res\shaders\VertexShader.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\fonts\arial.png" />
+    <Image Include="res\fonts\calibri.png" />
+    <Image Include="res\fonts\harrington.png" />
+    <Image Include="res\fonts\sans.png" />
+    <Image Include="res\fonts\segoe.png" />
+    <Image Include="res\fonts\segoeUI.png" />
+    <Image Include="res\fonts\tahoma.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

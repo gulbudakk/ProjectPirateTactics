@@ -69,6 +69,15 @@
     <ClCompile Include="src\Light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\ui\Text.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\Font.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\TextRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ShaderLoader.hpp">
@@ -134,6 +143,18 @@
     <ClInclude Include="src\Light.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\ui\Text.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\Font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\Character.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\TextRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\FragmentShader.shader" />
@@ -142,5 +163,37 @@
     <None Include="res\shaders\TextureVertexShader.shader" />
     <None Include="res\shaders\StandardFragmentShading.shader" />
     <None Include="res\shaders\StandardVertexShading.shader" />
+    <None Include="res\fonts\harrington.fnt" />
+    <None Include="res\fonts\sans.fnt" />
+    <None Include="res\fonts\segoe.fnt" />
+    <None Include="res\fonts\segoeUI.fnt" />
+    <None Include="res\fonts\tahoma.fnt" />
+    <None Include="res\fonts\arial.fnt" />
+    <None Include="res\fonts\calibri.fnt" />
+    <None Include="res\shaders\FontFragmentShader.shader" />
+    <None Include="res\shaders\FontVertexShader.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\fonts\harrington.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\fonts\sans.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\fonts\segoe.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\fonts\segoeUI.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\fonts\tahoma.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\fonts\arial.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\fonts\calibri.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

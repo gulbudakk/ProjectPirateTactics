@@ -7,6 +7,8 @@
 #include "VertexBuffer.h"
 
 #include <map>
+
+#include <map>
 #include <vector>
 
 using namespace glm;
@@ -26,7 +28,6 @@ class Object3D
 {
 private:
 	VertexBuffer m_Vb;
-	VertexBuffer m_Cb;
 
 	VertexArray m_Va;
 	IndexBuffer m_Ib;
@@ -38,14 +39,9 @@ private:
 	vector<vec3> m_Normals;
 	vector<unsigned int> m_Indices;
 
-	bool GetSimilarVertex(vec3 vertex, unsigned int& result);
-	bool GetSimilarVertex(Vertex& packed, map<Vertex, unsigned int>& VertexToOutIndex, unsigned int& result);
-
 	bool loadOBJ(const char* path, vector<glm::vec3>& out_vertices, vector<glm::vec2>& out_uvs, vector<glm::vec3>& out_normals);
-
-	void CreateIndices(vector<vec3> positions);
-	void CreateIndices(vector<vec3> positions, vector<vec2> uvs);
-	void CreateIndices(vector<vec3> positions, vector<vec2> uvs, vector<vec3> normals);
+	void CreateIndices(vector<vec3> in_positions, vector<vec2> in_uvs, vector<vec3> in_normals, vector<unsigned int>& out_indices, vector<vec3>& out_positions, vector<vec2>& out_uvs, vector<vec3>& out_normals);
+	bool GetSimilarVertex(Vertex& packed, map<Vertex, unsigned int>& VertexToOutIndex, unsigned int& result);
 
 public:
 	Object3D(const char* path);

@@ -22,6 +22,9 @@
 #include "Texture.h"
 #include "PirateTactics/BoardCubeTile.h"
 #include "Tilemap.h"
+#include "ui/Font.h"
+#include "ui/Text.h"
+#include "ui/TextRenderer.h"
 
 using namespace std;
 using namespace glm;
@@ -30,9 +33,9 @@ using namespace glm;
 int main(void)
 {
     Application application("Project Pirate Tactics", 1280, 720, 4);
-    application.Enable(GL_DEPTH_TEST);
-    application.Enable(GL_CULL_FACE);
-    application.SetDepthFunction(GL_LESS);
+    Application::Enable(GL_DEPTH_TEST);
+    Application::Enable(GL_CULL_FACE);
+    Application::SetDepthFunction(GL_LESS);
 
     glClearColor(0.8f, 1, 1, 0.0f);
 
@@ -77,6 +80,12 @@ int main(void)
     CameraMovement cameraMovement(camera);
     objects.push_back(&cameraMovement);
 
+    Texture fontTexture("res/fonts/arial.png", GL_MIRRORED_REPEAT);
+    Shader textShader("res/shaders/FontVertexShader.shader", "res/shaders/FontFragmentShader.shader");
+    Font font(fontTexture, "res/fonts/arial.fnt");
+
+    Text text(font, 1, 1, "1 2 3 4 5 6 7 8 9 0", 5);
+    TextRenderer textRenderer(text, textShader);
 
     /* Loop until the user closes the window */
     do
@@ -84,6 +93,8 @@ int main(void)
         Time::Tick();
 
         /* Render here */
+
+        textRenderer.Clear();
 
         for (unsigned int i = 0; i < objects.size(); i++)
         {
@@ -94,6 +105,8 @@ int main(void)
         {
             objects[i]->Tick();
         }
+
+        textRenderer.Draw();
 
         /* Swap front and back buffers */
         glfwSwapBuffers(&application.GetWindow());

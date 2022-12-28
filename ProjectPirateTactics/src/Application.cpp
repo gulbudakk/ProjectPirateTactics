@@ -40,12 +40,21 @@ Application::Application(const char* name, int width, int height, int samples) {
     cout << glGetString(GL_VERSION) << endl;
 }
 
-void Application::Enable(GLenum cap) const {
+void Application::Enable(GLenum cap) {
     glEnable(cap);
 }
+
+void Application::Disable(GLenum cap) {
+    glDisable(cap);
+}
+
 void Application::SetWindowHint(int hint, int value) const {
     glfwWindowHint(hint, value);
 }
-void Application::SetDepthFunction(GLenum function) const {
+void Application::SetDepthFunction(GLenum function) {
     glDepthFunc(function);
+}
+
+void Application::SetBlendFunction(GLenum sfactor, GLenum dfactor) {
+    glBlendFunc(sfactor, dfactor);
 }
