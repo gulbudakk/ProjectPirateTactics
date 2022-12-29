@@ -133,6 +133,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\DepthBuffer.cpp" />
+    <ClCompile Include="src\FrameBuffer.cpp" />
     <ClCompile Include="src\PirateTactics\ScoreText.cpp" />
     <ClCompile Include="src\ui\Font.cpp" />
     <ClCompile Include="src\Light.cpp" />
@@ -158,6 +160,8 @@
     <ClCompile Include="src\WaterRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\DepthBuffer.h" />
+    <ClInclude Include="src\FrameBuffer.h" />
     <ClInclude Include="src\PirateTactics\ScoreText.h" />
     <ClInclude Include="src\ui\Character.h" />
     <ClInclude Include="src\ui\Font.h" />

@@ -27,6 +27,8 @@
 #include "ui/TextRenderer.h"
 #include "PirateTactics/ScoreText.h"
 #include "WaterRenderer.h"
+#include "DepthBuffer.h"
+#include "FrameBuffer.h"
 
 using namespace std;
 using namespace glm;
@@ -108,6 +110,20 @@ int main(void)
     waterTransform.SetPosition(vec3(3.15 , 1.1, 3.15));
     waterTransform.SetScale(vec3(4.15));
 
+    int reflectionWidth = 320, reflectionHeight = 180,
+        refractionWidth = 1280, refractionHeight = 720;
+
+    Texture depthTexture(refractionWidth, refractionHeight, NULL, GL_DEPTH_COMPONENT32);
+    DepthBuffer depthBuffer(reflectionWidth, reflectionHeight);
+
+    FrameBuffer reflectionBuffer(reflectionWidth, reflectionHeight, depthBuffer);
+    FrameBuffer refractionBuffer(refractionWidth, refractionHeight, depthTexture);
+
+    reflectionBuffer.Unbind();
+
+    BoardCubeTile rock10(camera, object, reflectionBuffer.GetTexture(), shader);
+    rock10.GetTransform().SetPosition(vec3(3, 3, -1));
+
     /* Loop until the user closes the window */
     do
     {
@@ -115,6 +131,8 @@ int main(void)
 
         /* Render here */
         waterRenderer.Clear();
+
+        reflectionBuffer.Bind();
 
         for (unsigned int i = 0; i < objects.size(); i++)
         {
@@ -128,6 +146,21 @@ int main(void)
             objects[i]->Tick();
         }
 
+        reflectionBuffer.Unbind();
+
+        for (unsigned int i = 0; i < objects.size(); i++)
+        {
+            objects[i]->Clear();
+        }
+
+        waterRenderer.Draw();
+
+        for (unsigned int i = 0; i < objects.size(); i++)
+        {
+            objects[i]->Tick();
+        }
+
+        rock10.Tick();
 
         /* Swap front and back buffers */
         glfwSwapBuffers(&application.GetWindow());

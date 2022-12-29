@@ -25,11 +25,11 @@ void Renderer::Draw() {
 	float lightPower = m_Light.GetPower();
 	m_Shader.SetUniform1f("u_LightPower", lightPower);
 
-	IndexBuffer& ib = m_Object.GetIndexBuffer();
-	ib.Bind();
-
 	VertexArray& va = m_Object.GetVertexArray();
 	va.Bind();
+
+	IndexBuffer& ib = m_Object.GetIndexBuffer();
+	ib.Bind();
 
 	glDrawElements(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, nullptr);
 }
