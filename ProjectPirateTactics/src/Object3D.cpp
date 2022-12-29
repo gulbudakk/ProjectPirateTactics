@@ -1,6 +1,7 @@
 #include "Object3D.h"
 
 using namespace std;
+using namespace glm;
 
 Object3D::Object3D(const char* path) {
 	
@@ -31,6 +32,22 @@ Object3D::Object3D(const char* path) {
 	IndexBuffer ib(m_Indices, m_Indices.size());
 	m_Ib = ib;
 }
+
+Object3D::Object3D(vector<vec3> positions) {
+
+	m_Va.Bind();
+	CreateIndices(positions, m_Positions, m_Indices);
+
+	VertexBuffer vb(m_Positions, m_Positions.size() * sizeof(vec3));
+
+	VertexBufferLayout layout;
+	layout.Push<float>(vb.GetID(), 3);
+	m_Va.AddBuffer(vb, layout);
+
+	IndexBuffer ib(m_Indices, m_Indices.size());
+	m_Ib = ib;
+}
+
 
 bool Object3D::loadOBJ(const char* path, vector<glm::vec3>& out_vertices, vector<glm::vec2>& out_uvs, vector<glm::vec3>& out_normals) {
 	printf("Loading OBJ file %s...\n", path);
@@ -162,4 +179,37 @@ void Object3D::CreateIndices(vector<vec3> in_positions, vector<vec2> in_uvs, vec
 			VertexToOutIndex[packed] = newindex;
 		}
 	}
+}
+
+void Object3D::CreateIndices(vector<vec3> in_positions, vector<vec3>& out_positions, vector<unsigned int>& out_indices) {
+
+	for (unsigned int i = 0; i < in_positions.size(); i++)
+	{
+		// Try to find a similar vertex in out_XXXX
+		unsigned int index;
+		bool found = GetSimilarVertex(out_positions, in_positions[i], index);
+
+		if (found) { // A similar vertex is already in the VBO, use it instead !
+			out_indices.push_back(index);
+		}
+		else { // If not, it needs to be added in the output data.
+			out_positions.push_back(in_positions[i]);
+			unsigned int newindex = (unsigned int)out_positions.size() - 1;
+			out_indices.push_back(newindex);
+		}
+	}
+}
+
+bool Object3D::GetSimilarVertex(vector<vec3> in_positions, vec3 vertex, unsigned int& result) {
+
+	// Lame linear search
+	for (unsigned int i = 0; i < in_positions.size(); i++) {
+		if (in_positions[i].x == vertex.x && in_positions[i].y == vertex.y && in_positions[i].z == vertex.z) {
+			result = i;
+			return true;
+		}
+	}
+	// No other vertex could be used instead.
+	// Looks like we'll have to add it to the VBO.
+	return false;
 }

@@ -26,6 +26,7 @@
 #include "ui/Text.h"
 #include "ui/TextRenderer.h"
 #include "PirateTactics/ScoreText.h"
+#include "WaterRenderer.h"
 
 using namespace std;
 using namespace glm;
@@ -38,7 +39,7 @@ int main(void)
     Application::Enable(GL_CULL_FACE);
     Application::SetDepthFunction(GL_LESS);
 
-    glClearColor(0.8f, 1, 1, 0.0f);
+    //glClearColor(0.8f, 1, 1, 0.0f);
 
     Input::SetMousePosition(Application::GetWidth() / 2, Application::GetHeight() / 2);
 
@@ -81,7 +82,7 @@ int main(void)
     CameraMovement cameraMovement(camera);
     objects.push_back(&cameraMovement);
 
-    Texture fontTexture("res/fonts/arial.png", GL_MIRRORED_REPEAT);
+    Texture fontTexture("res/fonts/arial.png", GL_REPEAT);
     Shader textShader("res/shaders/FontVertexShader.shader", "res/shaders/FontFragmentShader.shader");
     Font font(fontTexture, "res/fonts/arial.fnt");
 
@@ -97,22 +98,36 @@ int main(void)
     scoreText1.SetPosition(vec2(-0.9f, 0.0f));
     scoreText2.SetPosition(vec2(0.9f, 0.0f));
 
+    vector<vec3> quadVertexPositions = { vec3(-1, 0, -1), vec3(-1, 0, 1), vec3(1, 0, -1), vec3(1, 0, -1), vec3(-1, 0, 1), vec3(1, 0, 1) };
+    Object3D waterQuad(quadVertexPositions);
+
+    Transform waterTransform;
+    Shader waterShader("res/shaders/WaterVertexShader.shader", "res/shaders/WaterFragmentShader.shader");
+    WaterRenderer waterRenderer(camera, waterQuad, waterTransform, waterShader);
+
+    waterTransform.SetPosition(vec3(3.15 , 1.1, 3.15));
+    waterTransform.SetScale(vec3(4.15));
+
     /* Loop until the user closes the window */
     do
     {
         Time::Tick();
 
         /* Render here */
+        waterRenderer.Clear();
 
         for (unsigned int i = 0; i < objects.size(); i++)
         {
             objects[i]->Clear();
         }
 
+        waterRenderer.Draw();
+
         for (unsigned int i = 0; i < objects.size(); i++)
         {
             objects[i]->Tick();
         }
+
 
         /* Swap front and back buffers */
         glfwSwapBuffers(&application.GetWindow());

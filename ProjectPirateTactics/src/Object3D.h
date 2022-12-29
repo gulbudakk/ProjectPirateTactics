@@ -41,10 +41,13 @@ private:
 
 	bool loadOBJ(const char* path, vector<glm::vec3>& out_vertices, vector<glm::vec2>& out_uvs, vector<glm::vec3>& out_normals);
 	void CreateIndices(vector<vec3> in_positions, vector<vec2> in_uvs, vector<vec3> in_normals, vector<unsigned int>& out_indices, vector<vec3>& out_positions, vector<vec2>& out_uvs, vector<vec3>& out_normals);
+	void CreateIndices(vector<vec3> in_positions, vector<vec3>& out_positions, vector<unsigned int>& out_indices);
 	bool GetSimilarVertex(Vertex& packed, map<Vertex, unsigned int>& VertexToOutIndex, unsigned int& result);
+	bool GetSimilarVertex(vector<vec3> in_positions, vec3 vertex, unsigned int& result);
 
 public:
 	Object3D(const char* path);
+	Object3D(vector<vec3> positions);
 	VertexArray& GetVertexArray() { return m_Va; }
 	IndexBuffer& GetIndexBuffer() { return m_Ib; }
 };

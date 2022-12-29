@@ -32,19 +32,6 @@ void Renderer::Draw() {
 	va.Bind();
 
 	glDrawElements(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, nullptr);
-	//glDrawArrays(GL_TRIANGLES, 0, 12 * 3); // 12*3 indices starting at 0 -> 12 triangles
-	 
-	/*
-	Shader shader = m_Object.GetShader();
-
-	shader.Bind();
-	shader.SetUniform4fv("u_MVP", 1, GL_FALSE, &m_Camera.GetMVP(m_Model)[0][0]);
-
-	VertexArray& va = m_Object.GetVertexArray();
-	va.Bind();
-
-	glDrawArrays(GL_TRIANGLES, 0, 12 * 3);
-	*/
 }
 
 

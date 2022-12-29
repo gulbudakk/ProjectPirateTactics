@@ -23,7 +23,6 @@ bool Font::ProcessNextLine() {
 	m_values.clear();
 	string line = "";
 	getline(m_fontFile, line);
-	cout << line << endl;
 
 	if (line == "") {
 		return false;

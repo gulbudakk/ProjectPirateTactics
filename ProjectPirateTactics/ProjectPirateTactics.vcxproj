@@ -155,6 +155,7 @@
     <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\Tilemap.cpp" />
     <ClCompile Include="src\ui\Text.cpp" />
+    <ClCompile Include="src\WaterRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\PirateTactics\ScoreText.h" />
@@ -184,6 +185,7 @@
     <ClInclude Include="src\VisualGameObject.h" />
     <ClInclude Include="src\Tilemap.h" />
     <ClInclude Include="src\ui\Text.h" />
+    <ClInclude Include="src\WaterRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\fonts\arial.fnt" />
@@ -201,6 +203,8 @@
     <None Include="res\shaders\TextureFragmentShader.shader" />
     <None Include="res\shaders\TextureVertexShader.shader" />
     <None Include="res\shaders\VertexShader.shader" />
+    <None Include="res\shaders\WaterFragmentShader.shader" />
+    <None Include="res\shaders\WaterVertexShader.shader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\fonts\arial.png" />
