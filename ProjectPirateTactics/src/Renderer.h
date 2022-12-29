@@ -25,7 +25,7 @@ private:
 public:
 	Renderer(Camera& camera, Object3D& object, Transform& transform, Texture& texture, Shader& shader) : m_Camera(camera), m_Object(object), m_Texture(texture), m_Transform(transform), m_Shader(shader) {}
 
-	void Draw();
+	void Draw(glm::vec4 clippingPlane);
 
 	void Clear() const;
 };

@@ -7,6 +7,12 @@ void WaterRenderer::Draw()
 	m_Shader.SetUniformMatrix4fv("u_M", 1, GL_FALSE, &m_Transform.GetModel()[0][0]);
 	m_Shader.SetUniformMatrix4fv("u_P", 1, GL_FALSE, &m_Camera.GetProjection()[0][0]);
 
+	m_reflectionTexture.Bind(0);
+	m_Shader.SetUniform1i("u_reflectionTexture", 0);
+
+	m_refractionTexture.Bind(1);
+	m_Shader.SetUniform1i("u_refractionTexture", 1);
+
 	VertexArray& va = m_Object.GetVertexArray();
 	va.Bind();
 

@@ -1,15 +1,16 @@
 #include "FrameBuffer.h"
 #include "Application.h"
 
-FrameBuffer::FrameBuffer(int width, int height, Texture deptTexture) : m_Width(width), m_Height(height), m_Texture(Texture(width, height, NULL, GL_RGB))
+FrameBuffer::FrameBuffer(int width, int height, Texture depthTexture) : m_Width(width), m_Height(height), m_Texture(Texture(width, height, NULL, GL_RGB))
 {
 	GenFrameBuffer();
+
 	m_Texture.Bind();
 	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_Texture.GetID(), 0);
 
-	m_DepthRendererID = deptTexture.GetID();
-	deptTexture.Bind();
-	glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, m_DepthRendererID, 0);
+	m_DepthRendererID = depthTexture.GetID();
+	//depthTexture.Bind();
+	//glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, m_DepthRendererID, 0);
 }
 
 FrameBuffer::FrameBuffer(int width, int height, DepthBuffer depthBuffer) : m_Width(width), m_Height(height), m_Texture(Texture(width, height, NULL, GL_RGB))

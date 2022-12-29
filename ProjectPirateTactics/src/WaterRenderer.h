@@ -19,9 +19,11 @@ private:
 	Shader& m_Shader;
 	Transform& m_Transform;
 
+	Texture& m_reflectionTexture;
+	Texture& m_refractionTexture;
 
 public:
-	WaterRenderer(Camera& camera, Object3D& object, Transform& transform, Shader& shader) : m_Camera(camera), m_Object(object), m_Transform(transform), m_Shader(shader) {}
+	WaterRenderer(Camera& camera, Object3D& object, Transform& transform, Shader& shader, Texture& reflectionTexture, Texture& refractionTexture) : m_Camera(camera), m_Object(object), m_Transform(transform), m_Shader(shader), m_reflectionTexture(reflectionTexture), m_refractionTexture(refractionTexture) {}
 
 	void Draw();
 

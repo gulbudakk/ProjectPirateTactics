@@ -12,7 +12,7 @@ private:
 	unsigned int m_DepthRendererID;
 
 public:
-	FrameBuffer(int width, int height, Texture deptTexture);
+	FrameBuffer(int width, int height, Texture depthTexture);
 	FrameBuffer(int width, int height, DepthBuffer depthBuffer);
 
 	void GenFrameBuffer();

@@ -29,6 +29,7 @@
 #include "WaterRenderer.h"
 #include "DepthBuffer.h"
 #include "FrameBuffer.h"
+#include "WaterObject.h"
 
 using namespace std;
 using namespace glm;
@@ -39,9 +40,10 @@ int main(void)
     Application application("Project Pirate Tactics", 1280, 720, 4);
     Application::Enable(GL_DEPTH_TEST);
     Application::Enable(GL_CULL_FACE);
+    Application::Enable(GL_CLIP_DISTANCE0);
     Application::SetDepthFunction(GL_LESS);
 
-    //glClearColor(0.8f, 1, 1, 0.0f);
+    glClearColor(0.8f, 1, 1, 0.0f);
 
     Input::SetMousePosition(Application::GetWidth() / 2, Application::GetHeight() / 2);
 
@@ -102,65 +104,88 @@ int main(void)
 
     vector<vec3> quadVertexPositions = { vec3(-1, 0, -1), vec3(-1, 0, 1), vec3(1, 0, -1), vec3(1, 0, -1), vec3(-1, 0, 1), vec3(1, 0, 1) };
     Object3D waterQuad(quadVertexPositions);
-
-    Transform waterTransform;
     Shader waterShader("res/shaders/WaterVertexShader.shader", "res/shaders/WaterFragmentShader.shader");
-    WaterRenderer waterRenderer(camera, waterQuad, waterTransform, waterShader);
-
-    waterTransform.SetPosition(vec3(3.15 , 1.1, 3.15));
-    waterTransform.SetScale(vec3(4.15));
 
     int reflectionWidth = 320, reflectionHeight = 180,
         refractionWidth = 1280, refractionHeight = 720;
 
-    Texture depthTexture(refractionWidth, refractionHeight, NULL, GL_DEPTH_COMPONENT32);
-    DepthBuffer depthBuffer(reflectionWidth, reflectionHeight);
+    WaterObject waterObject(camera, reflectionWidth, reflectionHeight, refractionWidth, refractionHeight, waterQuad, waterShader);
+    waterObject.GetTransform().SetPosition(vec3(3.15, 1.1, 3.15));
+    waterObject.GetTransform().SetScale(vec3(4.15));
 
-    FrameBuffer reflectionBuffer(reflectionWidth, reflectionHeight, depthBuffer);
-    FrameBuffer refractionBuffer(refractionWidth, refractionHeight, depthTexture);
+    BoardCubeTile reflectionCube(camera, object, waterObject.GetReflectionBuffer().GetTexture(), shader);
+    reflectionCube.GetTransform().SetPosition(vec3(3, 3, -1));
+    
+    BoardCubeTile refractionCube(camera, object, waterObject.GetRefractionBuffer().GetTexture(), shader);
+    refractionCube.GetTransform().SetPosition(vec3(5, 3, -1));
 
-    reflectionBuffer.Unbind();
-
-    BoardCubeTile rock10(camera, object, reflectionBuffer.GetTexture(), shader);
-    rock10.GetTransform().SetPosition(vec3(3, 3, -1));
+    vec4 clippingPlane(0, 0, 0, 0);
+    vec4 clippingPlaneReflection(0, 1, 0, -waterObject.GetTransform().GetPosition().y);
+    vec4 clippingPlaneRefraction(0, -1, 0, waterObject.GetTransform().GetPosition().y);
 
     /* Loop until the user closes the window */
     do
     {
         Time::Tick();
 
+        //render reflection texture
+        waterObject.GetReflectionBuffer().Bind();
+
+        //move the camera below the water
+
+        float distance = 2 * (camera.GetPosition().y - waterObject.GetTransform().GetPosition().y);
+        vec3 newPosition = vec3(camera.GetPosition().x, camera.GetPosition().y - distance, camera.GetPosition().z);
+        camera.SetPosition(newPosition);
+        camera.SetUp(-camera.GetUp());
+
+        for (unsigned int i = 0; i < objects.size(); i++)
+        {
+            objects[i]->Clear();
+        }
+
+        for (unsigned int i = 0; i < objects.size(); i++)
+        {
+            objects[i]->Tick(clippingPlaneReflection);
+        }
+
+        waterObject.GetReflectionBuffer().Unbind();
+
+        vec3 oldPosition = vec3(camera.GetPosition().x, camera.GetPosition().y + distance, camera.GetPosition().z);
+        camera.SetPosition(oldPosition);
+        camera.SetUp(-camera.GetUp());
+
+        //render refraction texture
+
+        waterObject.GetRefractionBuffer().Bind();
+
+        for (unsigned int i = 0; i < objects.size(); i++)
+        {
+            objects[i]->Clear();
+        }
+
+        for (unsigned int i = 0; i < objects.size(); i++)
+        {
+            objects[i]->Tick(clippingPlaneRefraction);
+        }
+
+        waterObject.GetRefractionBuffer().Unbind();
+
         /* Render here */
-        waterRenderer.Clear();
 
-        reflectionBuffer.Bind();
-
+        waterObject.Clear();
         for (unsigned int i = 0; i < objects.size(); i++)
         {
             objects[i]->Clear();
         }
 
-        waterRenderer.Draw();
+        waterObject.Tick();
+        reflectionCube.Tick(clippingPlane);
+        refractionCube.Tick(clippingPlane);
 
         for (unsigned int i = 0; i < objects.size(); i++)
         {
-            objects[i]->Tick();
+            objects[i]->Tick(clippingPlane);
         }
-
-        reflectionBuffer.Unbind();
-
-        for (unsigned int i = 0; i < objects.size(); i++)
-        {
-            objects[i]->Clear();
-        }
-
-        waterRenderer.Draw();
-
-        for (unsigned int i = 0; i < objects.size(); i++)
-        {
-            objects[i]->Tick();
-        }
-
-        rock10.Tick();
 
         /* Swap front and back buffers */
         glfwSwapBuffers(&application.GetWindow());

@@ -17,7 +17,8 @@ private:
 	
 	VisualGameObject*** m_World;
 protected:
-	void Update();
+	void Tick(glm::vec4 clippingPlane);
+	void Update(){}
 public:
 	Tilemap(unsigned int rows, unsigned int cols, float cellSize, float z);
 	~Tilemap();

@@ -81,6 +81,18 @@
     <ClCompile Include="src\PirateTactics\ScoreText.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\DepthBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FrameBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WaterRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WaterObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ShaderLoader.hpp">
@@ -164,6 +176,18 @@
     <ClInclude Include="src\PirateTactics\ScoreText.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\DepthBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FrameBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WaterRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WaterObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\FragmentShader.shader" />
@@ -181,6 +205,8 @@
     <None Include="res\fonts\calibri.fnt" />
     <None Include="res\shaders\FontFragmentShader.shader" />
     <None Include="res\shaders\FontVertexShader.shader" />
+    <None Include="res\shaders\WaterFragmentShader.shader" />
+    <None Include="res\shaders\WaterVertexShader.shader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\fonts\harrington.png">

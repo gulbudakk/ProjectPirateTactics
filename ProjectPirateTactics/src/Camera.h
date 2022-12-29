@@ -55,5 +55,8 @@ public:
 	vec3 GetRight();
 
 	vec3 GetDirection();
+
+	vec3 GetUp();
+	void SetUp(vec3 newUp);
 };
 

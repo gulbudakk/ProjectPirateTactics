@@ -78,3 +78,14 @@ void Camera::SetAngle(vec2 angle) {
 
 vec3 Camera::GetRight() { return m_Right; }
 vec3 Camera::GetDirection() { return m_Direction; }
+
+vec3 Camera::GetUp()
+{
+	return m_Up;
+}
+
+void Camera::SetUp(vec3 newUp)
+{
+	m_Up = newUp;
+	ComputeVP();
+}

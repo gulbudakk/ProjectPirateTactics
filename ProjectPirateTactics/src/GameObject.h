@@ -9,7 +9,7 @@ protected:
 	virtual void Update() = 0;
 
 public:
-	virtual void Tick() {
+	virtual void Tick(glm::vec4 clippingPlane) {
 		Update();
 	}
 	virtual void Clear() = 0;

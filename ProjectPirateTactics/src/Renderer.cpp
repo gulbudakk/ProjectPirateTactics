@@ -6,10 +6,12 @@ using namespace glm;
 
 const Light Renderer::m_Light(vec3(0.9f, 1, 0.9f), vec3(1, 10, 1), 50.0f);
 
-void Renderer::Draw() {
+void Renderer::Draw(glm::vec4 clippingPlane) {
 	
 	m_Shader.Bind();
 	m_Shader.SetUniformMatrix4fv("u_MVP", 1, GL_FALSE, &m_Camera.GetMVP(m_Transform.GetModel())[0][0]);
+
+	m_Shader.SetUniform4f("u_ClippingPlane", clippingPlane.x, clippingPlane.y, clippingPlane.z, clippingPlane.w);
 
 	m_Texture.Bind();
 	m_Shader.SetUniform1i("u_Texture", 0);

@@ -29,10 +29,10 @@ public:
 	Transform& GetTransform() { return m_Transform; }
 	void Clear() { m_Renderer.Clear(); }
 
-	void Tick() {
+	void Tick(glm::vec4 clippingPlane) {
 		Update();
 
-		m_Renderer.Draw();
+		m_Renderer.Draw(clippingPlane);
 	}
 
 	virtual VisualGameObject& operator=(VisualGameObject& other) = 0;

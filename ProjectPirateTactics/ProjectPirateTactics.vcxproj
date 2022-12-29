@@ -158,6 +158,7 @@
     <ClCompile Include="src\Tilemap.cpp" />
     <ClCompile Include="src\ui\Text.cpp" />
     <ClCompile Include="src\WaterRenderer.cpp" />
+    <ClCompile Include="src\WaterObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\DepthBuffer.h" />
@@ -190,6 +191,7 @@
     <ClInclude Include="src\Tilemap.h" />
     <ClInclude Include="src\ui\Text.h" />
     <ClInclude Include="src\WaterRenderer.h" />
+    <ClInclude Include="src\WaterObject.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\fonts\arial.fnt" />

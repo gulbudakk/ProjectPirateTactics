@@ -27,7 +27,7 @@ Tilemap::~Tilemap() {
 	free(m_World);
 }
 
-void Tilemap::Update() {
+void Tilemap::Tick(glm::vec4 clippingPlane) {
 
 	for (unsigned int r = 0; r < m_Rows; r++)
 	{
@@ -35,10 +35,12 @@ void Tilemap::Update() {
 		{
 			if (m_World[r][c] != nullptr)
 			{
-				m_World[r][c]->Tick();
+				m_World[r][c]->Tick(clippingPlane);
 			}
 		}
 	}
+
+	Update();
 }
 
 void Tilemap::Clear() {
