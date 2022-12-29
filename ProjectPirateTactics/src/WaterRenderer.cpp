@@ -13,6 +13,14 @@ void WaterRenderer::Draw()
 	m_refractionTexture.Bind(1);
 	m_Shader.SetUniform1i("u_refractionTexture", 1);
 
+	m_dudvTexture.Bind(2);
+	m_Shader.SetUniform1i("u_dudvmap", 2);
+
+	m_Shader.SetUniform1f("u_moveFactor", *m_moveFactor);
+
+	vec3 cameraPosition = m_Camera.GetPosition();
+	m_Shader.SetUniform3f("u_cameraPosition", cameraPosition.x, cameraPosition.y, cameraPosition.z);
+
 	VertexArray& va = m_Object.GetVertexArray();
 	va.Bind();
 

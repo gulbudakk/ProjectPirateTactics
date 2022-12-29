@@ -21,9 +21,12 @@ private:
 
 	Texture& m_reflectionTexture;
 	Texture& m_refractionTexture;
+	Texture& m_dudvTexture;
+
+	float* m_moveFactor;
 
 public:
-	WaterRenderer(Camera& camera, Object3D& object, Transform& transform, Shader& shader, Texture& reflectionTexture, Texture& refractionTexture) : m_Camera(camera), m_Object(object), m_Transform(transform), m_Shader(shader), m_reflectionTexture(reflectionTexture), m_refractionTexture(refractionTexture) {}
+	WaterRenderer(Camera& camera, Object3D& object, Transform& transform, Shader& shader, Texture& reflectionTexture, Texture& refractionTexture, Texture& dudvTexture, float* moveFactor) : m_Camera(camera), m_Object(object), m_Transform(transform), m_Shader(shader), m_reflectionTexture(reflectionTexture), m_refractionTexture(refractionTexture), m_dudvTexture(dudvTexture), m_moveFactor(moveFactor) {}
 
 	void Draw();
 

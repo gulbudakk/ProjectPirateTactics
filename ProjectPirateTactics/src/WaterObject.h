@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "FrameBuffer.h"
 #include "WaterRenderer.h"
+#include "Time.h"
 
 class WaterObject : public GameObject
 {
@@ -13,22 +14,30 @@ private:
 	Object3D& m_waterQuad;
 	Transform m_transform;
 	Shader& m_shader;
+
+	float rippleMoveFactor;
+	const float WAVE_SPEED = 0.03f;
 protected:
-	void Update(){}
+	void Update(){
+		rippleMoveFactor += WAVE_SPEED * Time::GetDeltaTime();
+		
+		if (rippleMoveFactor >= 1)
+		{
+			rippleMoveFactor = 0;
+		}
+	}
 
 public:
-	WaterObject(Camera& camera, int reflectionWidth, int reflectionHeight, int refractionWidth, int refractionHeight, Object3D& quad, Shader& waterShader) : 
+	WaterObject(Camera& camera, int reflectionWidth, int reflectionHeight, int refractionWidth, int refractionHeight, Object3D& quad, Shader& waterShader, Texture& dudvTexture) : 
 		m_reflectionBuffer(FrameBuffer(reflectionWidth, reflectionHeight, DepthBuffer(reflectionWidth, reflectionHeight))),
 		m_refractionBuffer(FrameBuffer(refractionWidth, refractionHeight, Texture(refractionWidth, refractionHeight, NULL, GL_DEPTH_COMPONENT32))),
 		m_waterQuad(quad), m_shader(waterShader), m_transform(Transform()), 
-		m_renderer(WaterRenderer(camera, quad, m_transform, waterShader, m_reflectionBuffer.GetTexture(), m_refractionBuffer.GetTexture())) {}
+		m_renderer(WaterRenderer(camera, quad, m_transform, waterShader, m_reflectionBuffer.GetTexture(), m_refractionBuffer.GetTexture(), dudvTexture, &rippleMoveFactor)) {}
 
 public:
 	void Tick() {
 
-		//m_reflectionBuffer.Bind();
 		m_renderer.Draw();
-		//m_reflectionBuffer.Unbind();
 
 		Update();
 	}

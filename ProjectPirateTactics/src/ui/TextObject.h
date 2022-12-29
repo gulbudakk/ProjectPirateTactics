@@ -17,7 +17,7 @@ public:
 
 	void Clear() { m_textRenderer.Clear(); }
 
-	void Tick() {
+	void Tick(glm::vec4 clippingPlane) {
 		Update();
 
 		m_textRenderer.Draw();

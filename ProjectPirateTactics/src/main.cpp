@@ -65,10 +65,10 @@ int main(void)
     Object3D object("res/models/cube.obj");
 
     unsigned int rows = 4, cols = 4;
-    Tilemap tilemap(rows, cols, 2.1, 0);
+    Tilemap tilemap(rows, cols, 2.05, 0);
     objects.push_back(&tilemap);
 
-    Tilemap obstacleTilemap(rows, cols, 2.1, 1);
+    Tilemap obstacleTilemap(rows+1, cols+1, 2.05, 1);
     objects.push_back(&obstacleTilemap);
 
     for (unsigned int r = 0; r < rows; r++)
@@ -81,7 +81,7 @@ int main(void)
     }
 
     BoardCubeTile rock1(camera, object, textureRock, shader);
-    obstacleTilemap.Draw(rock1, 2, 2);
+    obstacleTilemap.Draw(rock1, 1, 2);
 
     CameraMovement cameraMovement(camera);
     objects.push_back(&cameraMovement);
@@ -96,9 +96,6 @@ int main(void)
     ScoreText scoreText1(text1, textShader);
     ScoreText scoreText2(text2, textShader);
 
-    objects.push_back(&scoreText1);
-    objects.push_back(&scoreText2);
-
     scoreText1.SetPosition(vec2(-0.9f, 0.0f));
     scoreText2.SetPosition(vec2(0.9f, 0.0f));
 
@@ -109,18 +106,13 @@ int main(void)
     int reflectionWidth = 320, reflectionHeight = 180,
         refractionWidth = 1280, refractionHeight = 720;
 
-    WaterObject waterObject(camera, reflectionWidth, reflectionHeight, refractionWidth, refractionHeight, waterQuad, waterShader);
+    Texture dudvTexture("res/textures/waterdudvmap.png");
+    WaterObject waterObject(camera, reflectionWidth, reflectionHeight, refractionWidth, refractionHeight, waterQuad, waterShader, dudvTexture);
     waterObject.GetTransform().SetPosition(vec3(3.15, 1.1, 3.15));
-    waterObject.GetTransform().SetScale(vec3(4.15));
-
-    BoardCubeTile reflectionCube(camera, object, waterObject.GetReflectionBuffer().GetTexture(), shader);
-    reflectionCube.GetTransform().SetPosition(vec3(3, 3, -1));
+    waterObject.GetTransform().SetScale(vec3(4));
     
-    BoardCubeTile refractionCube(camera, object, waterObject.GetRefractionBuffer().GetTexture(), shader);
-    refractionCube.GetTransform().SetPosition(vec3(5, 3, -1));
-
     vec4 clippingPlane(0, 0, 0, 0);
-    vec4 clippingPlaneReflection(0, 1, 0, -waterObject.GetTransform().GetPosition().y);
+    vec4 clippingPlaneReflection(0, 1, 0, -waterObject.GetTransform().GetPosition().y - 0.1);
     vec4 clippingPlaneRefraction(0, -1, 0, waterObject.GetTransform().GetPosition().y);
 
     /* Loop until the user closes the window */
@@ -133,11 +125,13 @@ int main(void)
 
         //move the camera below the water
 
-        float distance = 2 * (camera.GetPosition().y - waterObject.GetTransform().GetPosition().y);
-        vec3 newPosition = vec3(camera.GetPosition().x, camera.GetPosition().y - distance, camera.GetPosition().z);
+        /*
+        vec3 cameraPosition = camera.GetPosition();
+        float distance = 2 * (cameraPosition.y - waterObject.GetTransform().GetPosition().y -0.1);
+        vec3 newPosition = vec3(cameraPosition.x, cameraPosition.y - distance, cameraPosition.z);
         camera.SetPosition(newPosition);
         camera.SetUp(-camera.GetUp());
-
+        */
         for (unsigned int i = 0; i < objects.size(); i++)
         {
             objects[i]->Clear();
@@ -150,9 +144,10 @@ int main(void)
 
         waterObject.GetReflectionBuffer().Unbind();
 
-        vec3 oldPosition = vec3(camera.GetPosition().x, camera.GetPosition().y + distance, camera.GetPosition().z);
-        camera.SetPosition(oldPosition);
+        /*
+        camera.SetPosition(cameraPosition);
         camera.SetUp(-camera.GetUp());
+        */
 
         //render refraction texture
 
@@ -178,15 +173,15 @@ int main(void)
             objects[i]->Clear();
         }
 
-        waterObject.Tick();
-        reflectionCube.Tick(clippingPlane);
-        refractionCube.Tick(clippingPlane);
-
         for (unsigned int i = 0; i < objects.size(); i++)
         {
             objects[i]->Tick(clippingPlane);
         }
 
+        waterObject.Tick();
+
+        scoreText1.Tick(clippingPlane);
+        scoreText2.Tick(clippingPlane);
         /* Swap front and back buffers */
         glfwSwapBuffers(&application.GetWindow());
 
