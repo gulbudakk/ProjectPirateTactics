@@ -30,6 +30,7 @@
 #include "DepthBuffer.h"
 #include "FrameBuffer.h"
 #include "WaterObject.h"
+#include "PirateTactics/Dice.h"
 
 using namespace std;
 using namespace glm;
@@ -63,12 +64,13 @@ int main(void)
 
     Shader shader("res/shaders/StandardVertexShading.shader", "res/shaders/StandardFragmentShading.shader");
     Object3D object("res/models/cube.obj");
+    Object3D rock("res/models/rock.obj");
 
-    unsigned int rows = 4, cols = 4;
+    unsigned int rows = 7, cols = 7;
     Tilemap tilemap(rows, cols, 2.05, 0);
     objects.push_back(&tilemap);
 
-    Tilemap obstacleTilemap(rows+1, cols+1, 2.05, 1);
+    Tilemap obstacleTilemap(rows, cols, 2.05, 0.52);
     objects.push_back(&obstacleTilemap);
 
     for (unsigned int r = 0; r < rows; r++)
@@ -80,8 +82,43 @@ int main(void)
         }
     }
 
-    BoardCubeTile rock1(camera, object, textureRock, shader);
-    obstacleTilemap.Draw(rock1, 1, 2);
+    {
+        BoardCubeTile rock1(camera, rock, textureRock, shader);
+        rock1.GetTransform().SetScale(vec3(0.3, 0.3, 0.3));
+        obstacleTilemap.Draw(rock1, 1, 1);
+
+        BoardCubeTile rock2(camera, rock, textureRock, shader);
+        rock2.GetTransform().SetScale(vec3(0.3, 0.3, 0.3));
+        obstacleTilemap.Draw(rock2, 1, 2);
+
+        BoardCubeTile rock3(camera, rock, textureRock, shader);
+        rock3.GetTransform().SetScale(vec3(0.3, 0.3, 0.3));
+        obstacleTilemap.Draw(rock3, 2, 1);
+
+        BoardCubeTile rock4(camera, rock, textureRock, shader);
+        rock4.GetTransform().SetScale(vec3(0.3, 0.3, 0.3));
+        obstacleTilemap.Draw(rock4, 5, 5);
+
+        BoardCubeTile rock5(camera, rock, textureRock, shader);
+        rock5.GetTransform().SetScale(vec3(0.3, 0.3, 0.3));
+        obstacleTilemap.Draw(rock5, 5, 4);
+
+        BoardCubeTile rock6(camera, rock, textureRock, shader);
+        rock6.GetTransform().SetScale(vec3(0.3, 0.3, 0.3));
+        obstacleTilemap.Draw(rock6, 4, 5);
+
+        BoardCubeTile rock7(camera, rock, textureRock, shader);
+        rock7.GetTransform().SetScale(vec3(0.3, 0.3, 0.3));
+        obstacleTilemap.Draw(rock7, 3, 3);
+
+        BoardCubeTile rock8(camera, rock, textureRock, shader);
+        rock8.GetTransform().SetScale(vec3(0.3, 0.3, 0.3));
+        obstacleTilemap.Draw(rock8, 3, 3);
+
+        BoardCubeTile rock9(camera, rock, textureRock, shader);
+        rock9.GetTransform().SetScale(vec3(0.3, 0.3, 0.3));
+        obstacleTilemap.Draw(rock9, 3, 3);
+    }
 
     CameraMovement cameraMovement(camera);
     objects.push_back(&cameraMovement);
@@ -108,12 +145,31 @@ int main(void)
 
     Texture dudvTexture("res/textures/waterdudvmap.png");
     WaterObject waterObject(camera, reflectionWidth, reflectionHeight, refractionWidth, refractionHeight, waterQuad, waterShader, dudvTexture);
-    waterObject.GetTransform().SetPosition(vec3(3.07, 1.1, 3.07));
-    waterObject.GetTransform().SetScale(vec3(4.07));
+    waterObject.GetTransform().SetPosition(vec3(6.12, 1.1, 6.12));
+    waterObject.GetTransform().SetScale(vec3(7.15));
     
     vec4 clippingPlane(0, 0, 0, 0);
     vec4 clippingPlaneReflection(0, 1, 0, -waterObject.GetTransform().GetPosition().y - 0.1);
     vec4 clippingPlaneRefraction(0, -1, 0, waterObject.GetTransform().GetPosition().y);
+
+    Texture diceTexture("res/textures/dice.jpg", GL_REPEAT);
+    Shader orthographicShader("res/shaders/OrtographicVertexShader.shader", "res/shaders/OrtographicFragmentShader.shader");
+    Dice dice1(camera, object, diceTexture, orthographicShader);
+    dice1.GetTransform().SetPosition(vec3(-0.85, 0.8, 0.0));
+    dice1.GetTransform().SetScale(vec3(0.1, 0.1, 0.1));
+    dice1.GetTransform().SetRotation(vec3(60, 30, 60));
+
+    Dice dice2(camera, object, diceTexture, orthographicShader);
+    dice2.GetTransform().SetPosition(vec3(0.85, 0.8, 0.0));
+    dice2.GetTransform().SetScale(vec3(0.1, 0.1, 0.1));
+    dice2.GetTransform().SetRotation(vec3(30, 60, 30));
+
+    Object3D ship("res/models/PirateShip.obj");
+    Texture shipTexture("res/textures/grey.png", GL_CLAMP_TO_BORDER);
+    BoardCubeTile boat(camera, ship, shipTexture, shader);
+    boat.GetTransform().SetPosition(vec3(0.0, 1, 0.0));
+    boat.GetTransform().SetScale(vec3(0.2, 0.2, 0.2));
+    objects.push_back(&boat);
 
     /* Loop until the user closes the window */
     do
@@ -180,8 +236,11 @@ int main(void)
 
         waterObject.Tick();
 
-        scoreText1.Tick(clippingPlane);
-        scoreText2.Tick(clippingPlane);
+        //scoreText1.Tick(clippingPlane);
+        //scoreText2.Tick(clippingPlane);
+        dice1.Tick(clippingPlane);
+        dice2.Tick(clippingPlane);
+
         /* Swap front and back buffers */
         glfwSwapBuffers(&application.GetWindow());
 

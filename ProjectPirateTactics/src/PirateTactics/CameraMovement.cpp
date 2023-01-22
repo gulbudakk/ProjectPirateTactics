@@ -43,5 +43,22 @@ void CameraMovement::ComputeMatrices() {
 }
 
 void CameraMovement::Update() {
-	ComputeMatrices();
+	if (Input::GetKey(KeyCode::Tab))
+	{
+		if (isMovementActive)
+		{
+			isMovementActive = false;
+		}
+
+		else
+		{
+			isMovementActive = true;
+		}
+		
+	}
+
+	if (isMovementActive)
+	{
+		ComputeMatrices();
+	}
 }

@@ -11,6 +11,8 @@ private:
 	float speed = 3.0f; // 3 units / second
 	float mouseSpeed = 0.005f;
 
+	bool isMovementActive = false;
+
 	void ComputeMatrices();
 protected:
 	void Update();

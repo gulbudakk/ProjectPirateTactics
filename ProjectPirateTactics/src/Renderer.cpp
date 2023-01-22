@@ -4,7 +4,7 @@
 
 using namespace glm;
 
-const Light Renderer::m_Light(vec3(0.9f, 1, 0.9f), vec3(1, 10, 1), 50.0f);
+const Light Renderer::m_Light(vec3(0.9f, 1, 0.9f), vec3(6.12, 10.1, 6.12), 50.0f);
 
 void Renderer::Draw(glm::vec4 clippingPlane) {
 	

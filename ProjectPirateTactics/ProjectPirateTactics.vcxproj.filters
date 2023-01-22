@@ -93,6 +93,12 @@
     <ClCompile Include="src\WaterObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\OrthographicRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OrthographicObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ShaderLoader.hpp">
@@ -188,6 +194,15 @@
     <ClInclude Include="src\WaterObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\PirateTactics\Dice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OrthographicRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OrthographicObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\FragmentShader.shader" />
@@ -207,6 +222,8 @@
     <None Include="res\shaders\FontVertexShader.shader" />
     <None Include="res\shaders\WaterFragmentShader.shader" />
     <None Include="res\shaders\WaterVertexShader.shader" />
+    <None Include="res\shaders\OrtographicVertexShader.shader" />
+    <None Include="res\shaders\OrtographicFragmentShader.shader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\fonts\harrington.png">
