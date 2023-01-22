@@ -108,8 +108,8 @@ int main(void)
 
     Texture dudvTexture("res/textures/waterdudvmap.png");
     WaterObject waterObject(camera, reflectionWidth, reflectionHeight, refractionWidth, refractionHeight, waterQuad, waterShader, dudvTexture);
-    waterObject.GetTransform().SetPosition(vec3(3.15, 1.1, 3.15));
-    waterObject.GetTransform().SetScale(vec3(4));
+    waterObject.GetTransform().SetPosition(vec3(3.07, 1.1, 3.07));
+    waterObject.GetTransform().SetScale(vec3(4.07));
     
     vec4 clippingPlane(0, 0, 0, 0);
     vec4 clippingPlaneReflection(0, 1, 0, -waterObject.GetTransform().GetPosition().y - 0.1);
