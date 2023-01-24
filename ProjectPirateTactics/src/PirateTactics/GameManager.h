@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "Player.h"
-#include "Dice.h"
+#include "Heart.h"
 
 class GameManager
 {
@@ -16,6 +16,7 @@ public:
 	GameManager(Player& player, Tilemap& obstacleTilemap) : m_player(player), m_Obstacles(obstacleTilemap) {}
 	void Tick();
 	void TryMoveShip();
+	void TryDamagePlayer();
 	void MoveObstacles();
 };
 

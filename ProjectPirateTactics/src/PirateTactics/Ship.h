@@ -16,4 +16,9 @@ public:
 
 	VisualGameObject& operator=(VisualGameObject& other);
 	bool MoveOnGrid(int row, int col);
+
+	void GetLocation(int& row, int& col) {
+		row = current_row;
+		col = current_col;
+	}
 };

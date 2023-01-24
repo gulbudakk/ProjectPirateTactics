@@ -25,12 +25,12 @@
 #include "ui/Font.h"
 #include "ui/Text.h"
 #include "ui/TextRenderer.h"
-#include "PirateTactics/ScoreText.h"
+#include "PirateTactics/HealthText.h"
 #include "WaterRenderer.h"
 #include "DepthBuffer.h"
 #include "FrameBuffer.h"
 #include "WaterObject.h"
-#include "PirateTactics/Dice.h"
+#include "PirateTactics/Heart.h"
 #include "PirateTactics/GameManager.h"
 
 using namespace std;
@@ -128,14 +128,11 @@ int main(void)
     Shader textShader("res/shaders/FontVertexShader.shader", "res/shaders/FontFragmentShader.shader");
     Font font(fontTexture, "res/fonts/arial.fnt");
 
-    Text text1(font, 1, 1, "6", 5);
-    Text text2(font, 1, 1, "6", 5);
+    Text text1(font, 1, 1, "3", 6);
 
-    ScoreText scoreText1(text1, textShader);
-    ScoreText scoreText2(text2, textShader);
+    HealthText healthText(text1, textShader);
 
-    scoreText1.SetPosition(vec2(-0.9f, 0.0f));
-    scoreText2.SetPosition(vec2(0.9f, 0.0f));
+    healthText.SetPosition(vec2(-0.62f, -0.01f));
 
     vector<vec3> quadVertexPositions = { vec3(-1, 0, -1), vec3(-1, 0, 1), vec3(1, 0, -1), vec3(1, 0, -1), vec3(-1, 0, 1), vec3(1, 0, 1) };
     Object3D waterQuad(quadVertexPositions);
@@ -153,27 +150,24 @@ int main(void)
     vec4 clippingPlaneReflection(0, 1, 0, -waterObject.GetTransform().GetPosition().y - 0.1);
     vec4 clippingPlaneRefraction(0, -1, 0, waterObject.GetTransform().GetPosition().y);
 
-    Texture diceTexture("res/textures/dice.jpg", GL_REPEAT);
+    Object3D heartObject("res/models/heart2.obj");
+    Texture diceTexture("res/textures/red.jpeg", GL_REPEAT);
     Shader orthographicShader("res/shaders/OrtographicVertexShader.shader", "res/shaders/OrtographicFragmentShader.shader");
-    Dice dice1(camera, object, diceTexture, orthographicShader);
-    dice1.GetTransform().SetPosition(vec3(-0.85, 0.8, 0.0));
+    Heart dice1(camera, heartObject, diceTexture, orthographicShader);
+    dice1.GetTransform().SetPosition(vec3(-0.85, 0.7, 0.0));
     dice1.GetTransform().SetScale(vec3(0.1, 0.1, 0.1));
-    dice1.GetTransform().SetRotation(vec3(60, 30, 60));
-
-    Dice dice2(camera, object, diceTexture, orthographicShader);
-    dice2.GetTransform().SetPosition(vec3(0.85, 0.8, 0.0));
-    dice2.GetTransform().SetScale(vec3(0.1, 0.1, 0.1));
-    dice2.GetTransform().SetRotation(vec3(30, 60, 30));
 
     Object3D ship("res/models/PirateShip.obj");
-    Texture shipTexture("res/textures/grey.png", GL_CLAMP_TO_BORDER);
+    Texture shipTexture("res/textures/dice.jpg", GL_CLAMP_TO_BORDER);
     Ship boat(camera, ship, shipTexture, shader, obstacleTilemap);
     boat.GetTransform().SetPosition(vec3(0.0, 1, 0.0));
     boat.GetTransform().SetScale(vec3(0.2, 0.2, 0.2));
     objects.push_back(&boat);
 
-    Player player(boat);
+    Player player(boat, healthText);
     GameManager gameManager(player, obstacleTilemap);
+
+    Renderer::GetLight().SetPosition(vec3(6.12, 10.1, 6.12));
 
     /* Loop until the user closes the window */
     do
@@ -181,8 +175,6 @@ int main(void)
         Time::Tick();
 
         gameManager.Tick();
-
-        //Renderer::GetLight().SetPosition(vec3(boat.GetTransform().GetPosition().x, boat.GetTransform().GetPosition().y + 5, boat.GetTransform().GetPosition().z));
 
         //render reflection texture
         waterObject.GetReflectionBuffer().Bind();
@@ -232,6 +224,8 @@ int main(void)
         /* Render here */
 
         waterObject.Clear();
+        healthText.Clear();
+
         for (unsigned int i = 0; i < objects.size(); i++)
         {
             objects[i]->Clear();
@@ -244,10 +238,8 @@ int main(void)
 
         waterObject.Tick();
 
-        //scoreText1.Tick(clippingPlane);
-        //scoreText2.Tick(clippingPlane);
+        healthText.Tick(clippingPlane);
         dice1.Tick(clippingPlane);
-        dice2.Tick(clippingPlane);
 
         /* Swap front and back buffers */
         glfwSwapBuffers(&application.GetWindow());

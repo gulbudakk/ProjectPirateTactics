@@ -26,6 +26,7 @@ public:
 
 	void Draw(VisualGameObject& object, unsigned int row, unsigned int col);
 	void Clear();
+	void Clear(int row, int col);
 	glm::vec3 ToWorldPoint(int x, int y);
 	bool IsEmpty(int x, int y);
 	bool IsValid(int row, int col);

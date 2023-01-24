@@ -3,13 +3,15 @@
 #include "../OrthographicRenderer.h"
 #include "../OrthographicObject.h"
 
-class Dice : public OrthographicObject
+class Heart : public OrthographicObject
 {
 protected:
-	void Update() {}
+	void Update();
+
+	float speed = 30;
 public:
-	Dice(Camera& camera, Object3D& object, Texture& texture, Shader& shader) : OrthographicObject(camera, object, texture, shader) {}
-	Dice(Dice& other) : OrthographicObject(other) {}
+	Heart(Camera& camera, Object3D& object, Texture& texture, Shader& shader) : OrthographicObject(camera, object, texture, shader) {}
+	Heart(Heart& other) : OrthographicObject(other) {}
 
 	OrthographicObject& operator=(OrthographicObject& other)
 	{

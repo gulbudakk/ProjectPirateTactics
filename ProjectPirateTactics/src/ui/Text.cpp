@@ -5,6 +5,9 @@ Text::Text(Font& font, float lineMaxSize, int numberOfLines, string text, float 
 }
 
 void Text::UpdateVertices() {
+	m_vertexPositions.clear();
+	m_textureCoords.clear();
+
 	vector<Line> lines = CreateStructure();
 	CreateQuadVertices(lines);
 

@@ -56,6 +56,11 @@ void Tilemap::Clear() {
 	}
 }
 
+void Tilemap::Clear(int row, int col)
+{
+	m_World[row][col] = nullptr;
+}
+
 vec3 Tilemap::ToWorldPoint(int row, int col)
 {
 

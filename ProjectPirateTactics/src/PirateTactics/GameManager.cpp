@@ -31,23 +31,45 @@ void GameManager::TryMoveShip() {
 	{
 		m_player.GetShip().MoveOnGrid(0, -1);
 		m_isMovingActive = false;
+		TryDamagePlayer();
+
 	}
 	if (Input::GetKey(KeyCode::D) == GLFW_PRESS)
 	{
 		m_player.GetShip().MoveOnGrid(0, 1);
 		m_isMovingActive = false;
+		TryDamagePlayer();
+
 	}
 
 	if (Input::GetKey(KeyCode::W) == GLFW_PRESS)
 	{
 		m_player.GetShip().MoveOnGrid(1, 0);
 		m_isMovingActive = false;
+		TryDamagePlayer();
+
 	}
 
 	if (Input::GetKey(KeyCode::S) == GLFW_PRESS)
 	{
 		m_player.GetShip().MoveOnGrid(-1, 0);
-		m_isMovingActive = false;
+		m_isMovingActive = false; 
+		TryDamagePlayer();
+	}
+}
+
+void GameManager::TryDamagePlayer() {
+
+	int row;
+	int col;
+
+	m_player.GetShip().GetLocation(row, col);
+
+	if (m_Obstacles.IsEmpty(row, col))
+	{
+		m_player.GetHealth().TakeDamage(1);
+		
+		m_Obstacles.Clear(row, col);
 	}
 }
 
