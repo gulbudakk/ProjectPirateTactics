@@ -1,5 +1,5 @@
 #include "WaterRenderer.h"
-
+#include "Renderer.h"
 void WaterRenderer::Draw()
 {
 	m_Shader.Bind();
@@ -16,10 +16,16 @@ void WaterRenderer::Draw()
 	m_dudvTexture.Bind(2);
 	m_Shader.SetUniform1i("u_dudvmap", 2);
 
+	m_normalmapTexture.Bind(3);
+	m_Shader.SetUniform1i("u_normalmap", 3);
+
 	m_Shader.SetUniform1f("u_moveFactor", *m_moveFactor);
 
 	vec3 cameraPosition = m_Camera.GetPosition();
 	m_Shader.SetUniform3f("u_cameraPosition", cameraPosition.x, cameraPosition.y, cameraPosition.z);
+
+	m_Shader.SetUniform3f("u_lightColor", Renderer::GetLight().GetColor().x, Renderer::GetLight().GetColor().y, Renderer::GetLight().GetColor().z);
+	m_Shader.SetUniform3f("u_lightPosition", Renderer::GetLight().GetPosition().x, Renderer::GetLight().GetPosition().y, Renderer::GetLight().GetPosition().z);
 
 	VertexArray& va = m_Object.GetVertexArray();
 	va.Bind();

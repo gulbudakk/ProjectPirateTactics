@@ -14,7 +14,7 @@ private:
 	int m_Width, m_Height, m_BPP = 0;
 
 public:
-	Texture(const string path, int wrapType = GL_CLAMP);
+	Texture(const string path, int wrapType = GL_REPEAT);
 	Texture(int width, int height, unsigned char* buffer, GLint format);
 
 	void Bind(unsigned int slot = 0) const;

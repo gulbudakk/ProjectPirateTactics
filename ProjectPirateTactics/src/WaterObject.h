@@ -28,11 +28,11 @@ protected:
 	}
 
 public:
-	WaterObject(Camera& camera, int reflectionWidth, int reflectionHeight, int refractionWidth, int refractionHeight, Object3D& quad, Shader& waterShader, Texture& dudvTexture) : 
+	WaterObject(Camera& camera, int reflectionWidth, int reflectionHeight, int refractionWidth, int refractionHeight, Object3D& quad, Shader& waterShader, Texture& dudvTexture, Texture& normalmap) : 
 		m_reflectionBuffer(FrameBuffer(reflectionWidth, reflectionHeight, DepthBuffer(reflectionWidth, reflectionHeight))),
 		m_refractionBuffer(FrameBuffer(refractionWidth, refractionHeight, Texture(refractionWidth, refractionHeight, NULL, GL_DEPTH_COMPONENT32))),
 		m_waterQuad(quad), m_shader(waterShader), m_transform(Transform()), 
-		m_renderer(WaterRenderer(camera, quad, m_transform, waterShader, m_reflectionBuffer.GetTexture(), m_refractionBuffer.GetTexture(), dudvTexture, &rippleMoveFactor)) {}
+		m_renderer(WaterRenderer(camera, quad, m_transform, waterShader, m_reflectionBuffer.GetTexture(), m_refractionBuffer.GetTexture(), dudvTexture, normalmap, &rippleMoveFactor)) {}
 
 public:
 	void Tick() {

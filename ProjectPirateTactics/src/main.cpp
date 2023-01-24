@@ -141,8 +141,9 @@ int main(void)
     int reflectionWidth = 320, reflectionHeight = 180,
         refractionWidth = 1280, refractionHeight = 720;
 
-    Texture dudvTexture("res/textures/waterdudvmap.png");
-    WaterObject waterObject(camera, reflectionWidth, reflectionHeight, refractionWidth, refractionHeight, waterQuad, waterShader, dudvTexture);
+    Texture dudvTexture("res/textures/waterdudvmap.png", GL_REPEAT);
+    Texture normalmapTexture("res/textures/waternormalmap.png", GL_REPEAT);
+    WaterObject waterObject(camera, reflectionWidth, reflectionHeight, refractionWidth, refractionHeight, waterQuad, waterShader, dudvTexture, normalmapTexture);
     waterObject.GetTransform().SetPosition(vec3(6.12, 1.1, 6.12));
     waterObject.GetTransform().SetScale(vec3(7.15));
     
@@ -181,13 +182,12 @@ int main(void)
 
         //move the camera below the water
 
-        /*
         vec3 cameraPosition = camera.GetPosition();
         float distance = 2 * (cameraPosition.y - waterObject.GetTransform().GetPosition().y -0.1);
         vec3 newPosition = vec3(cameraPosition.x, cameraPosition.y - distance, cameraPosition.z);
         camera.SetPosition(newPosition);
         camera.SetUp(-camera.GetUp());
-        */
+
         for (unsigned int i = 0; i < objects.size(); i++)
         {
             objects[i]->Clear();
@@ -200,10 +200,9 @@ int main(void)
 
         waterObject.GetReflectionBuffer().Unbind();
 
-        /*
+
         camera.SetPosition(cameraPosition);
         camera.SetUp(-camera.GetUp());
-        */
 
         //render refraction texture
 
