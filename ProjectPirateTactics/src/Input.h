@@ -163,9 +163,9 @@ enum MouseCode
 class Input
 {
 public:
-	static bool GetKey(KeyCode key);
+	static int GetKey(KeyCode key);
 
-	static bool GetMouseButton(MouseCode button);
+	static int GetMouseButton(MouseCode button);
 	static glm::vec2 GetMousePosition();
 	static void SetMousePosition(int width, int height);
 

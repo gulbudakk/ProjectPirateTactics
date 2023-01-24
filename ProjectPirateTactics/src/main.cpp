@@ -31,6 +31,7 @@
 #include "FrameBuffer.h"
 #include "WaterObject.h"
 #include "PirateTactics/Dice.h"
+#include "PirateTactics/GameManager.h"
 
 using namespace std;
 using namespace glm;
@@ -44,7 +45,7 @@ int main(void)
     Application::Enable(GL_CLIP_DISTANCE0);
     Application::SetDepthFunction(GL_LESS);
 
-    glClearColor(0.8f, 1, 1, 0.0f);
+    //glClearColor(0.8f, 1, 1, 0.0f);
 
     Input::SetMousePosition(Application::GetWidth() / 2, Application::GetHeight() / 2);
 
@@ -166,15 +167,22 @@ int main(void)
 
     Object3D ship("res/models/PirateShip.obj");
     Texture shipTexture("res/textures/grey.png", GL_CLAMP_TO_BORDER);
-    BoardCubeTile boat(camera, ship, shipTexture, shader);
+    Ship boat(camera, ship, shipTexture, shader, obstacleTilemap);
     boat.GetTransform().SetPosition(vec3(0.0, 1, 0.0));
     boat.GetTransform().SetScale(vec3(0.2, 0.2, 0.2));
     objects.push_back(&boat);
+
+    Player player(boat);
+    GameManager gameManager(player, obstacleTilemap);
 
     /* Loop until the user closes the window */
     do
     {
         Time::Tick();
+
+        gameManager.Tick();
+
+        //Renderer::GetLight().SetPosition(vec3(boat.GetTransform().GetPosition().x, boat.GetTransform().GetPosition().y + 5, boat.GetTransform().GetPosition().z));
 
         //render reflection texture
         waterObject.GetReflectionBuffer().Bind();

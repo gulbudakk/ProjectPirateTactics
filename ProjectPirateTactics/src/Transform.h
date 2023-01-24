@@ -12,6 +12,7 @@ private:
 	vec3 m_position = vec3(0);
 	vec3 m_rotation = vec3(0);
 	vec3 m_scale = vec3(1);
+	vec3 m_Direction;
 
 public:
 	Transform(){}
@@ -46,5 +47,7 @@ public:
 		m_scale = scale;
 		CalculateModel();
 	}
+
+	vec3 GetDirection() { return m_Direction; }
 };
 

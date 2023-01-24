@@ -133,11 +133,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\PirateTactics\GameManager.cpp" />
     <ClCompile Include="src\OrthographicObject.cpp" />
     <ClCompile Include="src\OrthographicRenderer.cpp" />
     <ClCompile Include="src\DepthBuffer.cpp" />
     <ClCompile Include="src\FrameBuffer.cpp" />
+    <ClCompile Include="src\PirateTactics\Player.cpp" />
     <ClCompile Include="src\PirateTactics\ScoreText.cpp" />
+    <ClCompile Include="src\PirateTactics\Ship.cpp" />
     <ClCompile Include="src\ui\Font.cpp" />
     <ClCompile Include="src\Light.cpp" />
     <ClCompile Include="src\Clouds.cpp" />
@@ -163,12 +166,15 @@
     <ClCompile Include="src\WaterObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\PirateTactics\GameManager.h" />
     <ClInclude Include="src\OrthographicObject.h" />
     <ClInclude Include="src\OrthographicRenderer.h" />
     <ClInclude Include="src\DepthBuffer.h" />
     <ClInclude Include="src\FrameBuffer.h" />
     <ClInclude Include="src\PirateTactics\Dice.h" />
+    <ClInclude Include="src\PirateTactics\Player.h" />
     <ClInclude Include="src\PirateTactics\ScoreText.h" />
+    <ClInclude Include="src\PirateTactics\Ship.h" />
     <ClInclude Include="src\ui\Character.h" />
     <ClInclude Include="src\ui\Font.h" />
     <ClInclude Include="src\Light.h" />

@@ -20,7 +20,7 @@ private:
 	Texture& m_Texture;
 	Transform& m_Transform;
 
-	static const Light m_Light;
+	static Light m_Light;
 
 public:
 	Renderer(Camera& camera, Object3D& object, Transform& transform, Texture& texture, Shader& shader) : m_Camera(camera), m_Object(object), m_Texture(texture), m_Transform(transform), m_Shader(shader) {}
@@ -28,5 +28,7 @@ public:
 	void Draw(glm::vec4 clippingPlane);
 
 	void Clear() const;
+
+	static Light& GetLight() { return m_Light; }
 };
 

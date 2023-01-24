@@ -99,6 +99,15 @@
     <ClCompile Include="src\OrthographicObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\PirateTactics\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PirateTactics\Ship.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PirateTactics\GameManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ShaderLoader.hpp">
@@ -201,6 +210,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\OrthographicObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PirateTactics\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PirateTactics\Ship.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PirateTactics\GameManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,19 +5,19 @@
 #include "Application.h"
 #include <iostream>
 
-bool Input::GetKey(const KeyCode key)
+int Input::GetKey(const KeyCode key)
 {
 	auto* inputWindow = static_cast<GLFWwindow*>(&Application::GetWindow());
 	auto state = glfwGetKey(inputWindow, static_cast<int32_t>(key));
 
-	return state == GLFW_PRESS;
+	return state;
 }
 
-bool Input::GetMouseButton(const MouseCode button)
+int Input::GetMouseButton(const MouseCode button)
 {
 	auto* inputWindow = static_cast<GLFWwindow*>(&Application::GetWindow());
 	auto state = glfwGetMouseButton(inputWindow, static_cast<int32_t>(button));
-	return state == GLFW_PRESS;
+	return state;
 }
 
 glm::vec2 Input::GetMousePosition()

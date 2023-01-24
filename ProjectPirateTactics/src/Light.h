@@ -16,5 +16,7 @@ public:
 	const vec3 GetColor() const { return m_Color; }
 	const vec3 GetPosition() const  { return m_Position; }
 	const float GetPower() const { return m_Power; }
+
+	void SetPosition(vec3 position) { m_Position = position; }
 };
 

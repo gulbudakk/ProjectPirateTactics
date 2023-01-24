@@ -1,5 +1,6 @@
 #pragma once
 
+#include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <vector>
@@ -25,5 +26,10 @@ public:
 
 	void Draw(VisualGameObject& object, unsigned int row, unsigned int col);
 	void Clear();
+	glm::vec3 ToWorldPoint(int x, int y);
+	bool IsEmpty(int x, int y);
+	bool IsValid(int row, int col);
+
+	vector<vector<VisualGameObject*>*>* GetMap();
 };
 
