@@ -245,6 +245,8 @@
     <None Include="res\shaders\WaterVertexShader.shader" />
     <None Include="res\shaders\OrtographicVertexShader.shader" />
     <None Include="res\shaders\OrtographicFragmentShader.shader" />
+    <None Include="res\shaders\SkyboxVertexShader.shader" />
+    <None Include="res\shaders\SkyboxFragmentShader.shader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\fonts\harrington.png">

@@ -10,11 +10,12 @@ private:
 	unsigned int m_RendererID;
 	string m_FilePath;
 	unsigned char* m_LocalBuffer;
+	int m_type;
 
 	int m_Width, m_Height, m_BPP = 0;
 
 public:
-	Texture(const string path, int wrapType = GL_REPEAT);
+	Texture(const string path, int wrapType = GL_REPEAT, int type = GL_TEXTURE_2D);
 	Texture(int width, int height, unsigned char* buffer, GLint format);
 
 	void Bind(unsigned int slot = 0) const;

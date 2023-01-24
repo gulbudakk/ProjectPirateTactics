@@ -7,7 +7,7 @@ class Ship : public VisualGameObject{
 
 protected:
 	Tilemap& m_obstacleTilemap;
-	int current_row = 1, current_col = 0;
+	int current_row = 0, current_col = 0;
 
 	void Update();
 public:

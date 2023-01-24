@@ -61,17 +61,17 @@ int main(void)
     vector<GameObject*> objects;
 
     Texture textureRock("res/textures/grey.png", GL_REPEAT);
-    Texture texture("res/textures/dirt.png", GL_REPEAT);
+    Texture texture("res/textures/sand.jpg", GL_REPEAT);
 
     Shader shader("res/shaders/StandardVertexShading.shader", "res/shaders/StandardFragmentShading.shader");
     Object3D object("res/models/cube.obj");
     Object3D rock("res/models/rock.obj");
 
     unsigned int rows = 7, cols = 7;
-    Tilemap tilemap(rows, cols, 2.05, 0);
+    Tilemap tilemap(rows, cols, 2.00, 0);
     objects.push_back(&tilemap);
 
-    Tilemap obstacleTilemap(rows, cols, 2.05, 0.52);
+    Tilemap obstacleTilemap(rows, cols, 2.00, 0.52);
     objects.push_back(&obstacleTilemap);
 
     for (unsigned int r = 0; r < rows; r++)
@@ -159,7 +159,7 @@ int main(void)
     dice1.GetTransform().SetScale(vec3(0.1, 0.1, 0.1));
 
     Object3D ship("res/models/PirateShip.obj");
-    Texture shipTexture("res/textures/dice.jpg", GL_CLAMP_TO_BORDER);
+    Texture shipTexture("res/textures/wood.jpg", GL_REPEAT);
     Ship boat(camera, ship, shipTexture, shader, obstacleTilemap);
     boat.GetTransform().SetPosition(vec3(0.0, 1, 0.0));
     boat.GetTransform().SetScale(vec3(0.2, 0.2, 0.2));

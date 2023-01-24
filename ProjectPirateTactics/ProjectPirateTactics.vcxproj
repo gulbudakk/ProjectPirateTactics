@@ -218,6 +218,8 @@
     <None Include="res\shaders\FragmentShader.shader" />
     <None Include="res\shaders\OrtographicFragmentShader.shader" />
     <None Include="res\shaders\OrtographicVertexShader.shader" />
+    <None Include="res\shaders\SkyboxFragmentShader.shader" />
+    <None Include="res\shaders\SkyboxVertexShader.shader" />
     <None Include="res\shaders\StandardFragmentShading.shader" />
     <None Include="res\shaders\StandardVertexShading.shader" />
     <None Include="res\shaders\TextureFragmentShader.shader" />
