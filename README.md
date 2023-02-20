@@ -7,7 +7,7 @@ Implemented Features:
 
   3D viewing and objects.
 
-  User input. Your game must allow players to interact with the game via keyboard or mouse controls.
+  User input that allow players to interact with the game via keyboard or mouse controls.
 
   Lighting and smooth shading using OpenGL's lighting model.
 
